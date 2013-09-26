@@ -1,0 +1,7 @@
+#!/bin/bash
+
+sudo rm /etc/network/interfaces
+sudo cp /etc/network/interfaces_866 /etc/network/interfaces
+sudo ifdown eth0
+sudo ifup eth0
+sudo sh -c "echo \"nameserver 192.168.1.1\" > /etc/resolv.conf"

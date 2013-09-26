@@ -1,0 +1,35 @@
+#!/bin/bash
+
+if [ "$1" = "" ]; then
+    echo -n "Input your target:"
+    read TARGET
+else
+    TARGET="$1"
+fi
+
+case $TARGET in
+    tr781)
+        TARGET_IMAGE="$TR781_OUT/2kpagenand_images"
+        ;;
+    tr761)
+        TARGET_IMAGE="$TR761_OUT"
+        ;;
+    d)
+        TARGET_IMAGE="$HOME/Downloads"
+        ;;
+    s)
+        TARGET_IMAGE="$HOME/share"
+        ;;
+    *)
+        echo "unknow target:$TARGET"
+        exit 1
+        ;;
+esac
+
+sudo $ANDROID_SDK_PLATFORM_TOOLS/adb reboot bootloader
+sudo $ANDROID_SDK_PLATFORM_TOOLS/fastboot flash boot $TARGET_IMAGE/boot.2knand.img
+sudo $ANDROID_SDK_PLATFORM_TOOLS/fastboot flash system $TARGET_IMAGE/system.2knand.img
+sudo $ANDROID_SDK_PLATFORM_TOOLS/fastboot flash persist $TARGET_IMAGE/persist.2knand.img
+sudo $ANDROID_SDK_PLATFORM_TOOLS/fastboot flash recovery $TARGET_IMAGE/recovery.2knand.img
+sudo $ANDROID_SDK_PLATFORM_TOOLS/fastboot flash userdata $TARGET_IMAGE/userdata.2knand.img
+sudo $ANDROID_SDK_PLATFORM_TOOLS/fastboot reboot

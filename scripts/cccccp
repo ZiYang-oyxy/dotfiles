@@ -1,0 +1,68 @@
+#!/bin/bash
+
+if [ "$1" = "" ]; then
+    echo -n "Input your target:"
+    read TARGET
+else
+    TARGET="$1"
+fi
+
+case $TARGET in
+    12U01)
+        ROOT_PATH="master"
+        # refer from Makefile.product
+        PREFIX="mr12uv1_cn"
+        FLASH_SIZE=4M
+        ;;
+    12U02)
+        ROOT_PATH="mr12u"
+        # refer from Makefile.product
+        PREFIX="mr12uv2_cn"
+        FLASH_SIZE=4M
+        ;;
+    13U01)
+        ROOT_PATH="master"
+        # refer from Makefile.product
+        PREFIX="mr13uv1_cn"
+        FLASH_SIZE=4M
+        ;;
+    13U02)
+        ROOT_PATH="mr13u"
+        # refer from Makefile.product
+        PREFIX="mr13uv2_cn"
+        FLASH_SIZE=8M
+        ;;
+    TR86301)
+        ROOT_PATH="tr863"
+        PREFIX=tr863v1_cn
+        FLASH_SIZE=8M
+        ;;
+    *)
+        echo "unknow target:$TARGET"
+        exit 1
+        ;;
+esac
+
+SOURCE_PATH="${HOME}/${ROOT_PATH}/images/ap121"
+
+TIME=`date +%y%m%d`
+
+IMG_NAME="${PREFIX}_3_17_1_up(${TIME}).bin"
+#IMG_NAME="${PREFIX}_3_17_1_flash(${TIME}).bin"
+
+TFTP_DIR="/tftpboot"
+
+echo "==============="
+echo "sudo cp -f ${SOURCE_PATH}/${IMG_NAME} ${TFTP_DIR}/${IMG_NAME}"
+sudo cp -f ${SOURCE_PATH}/${IMG_NAME} ${TFTP_DIR}/${IMG_NAME}
+
+echo "==============="
+echo "[flash command]"
+if [ ${FLASH_SIZE} = "8M" ]; then
+    echo "setenv ipaddr 192.168.1.1;set serverip 192.168.1.100;tftp 80800000 ${IMG_NAME};erase 9f020000 +7c0000;cp.b 80800000 9f020000 7c0000;bootm;"
+else
+    echo "setenv ipaddr 192.168.1.1;set serverip 192.168.1.100;tftp 80800000 ${IMG_NAME};erase 9f020000 +3c0000;cp.b 80800000 9f020000 3c0000;bootm;"
+#    echo "setenv ipaddr 192.168.1.1;set serverip 192.168.1.100;tftp 80800000 ${IMG_NAME};erase 9f000000 +800000;cp.b 80800000 9f000000 800000;tftp 80800000 cal_back.bin;erase 9f7f0000 +10000;cp.b 80800000 9f7f0000 10000;bootm;"
+#else
+#    echo "setenv ipaddr 192.168.1.1;set serverip 192.168.1.100;tftp 80800000 ${IMG_NAME};erase 9f000000 +400000;cp.b 80800000 9f000000 400000;tftp 80800000 cal_back.bin;erase 9f3f0000 +10000;cp.b 80800000 9f3f0000 10000;bootm;"
+fi

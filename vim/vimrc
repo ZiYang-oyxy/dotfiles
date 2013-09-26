@@ -1,0 +1,367 @@
+""""""""""""""""""""""""""""""""""""""""""""""""
+" Maintainer:
+"   Ouyang Xiongyi
+"
+"   Inspired by http://easwy.com/blog/
+""""""""""""""""""""""""""""""""""""""""""""""""
+
+set nocompatible                " be iMproved
+filetype off                    " required!
+
+let mapleader = "\ "            " must on the top
+let g:mapleader = "\ "
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle
+" required! 
+Bundle 'gmarik/vundle.git'
+
+" Tags
+Bundle 'majutsushi/tagbar.git'
+map <silent> <F7> :TagbarToggle<CR>
+set updatetime=2000
+let g:tagbar_left = 1
+let g:tagbar_width = 30
+let g:tagbar_compact = 1
+let g:tagbar_iconchars = ['▸', '▾']
+let g:tagbar_map_zoomwin = "z"
+let g:tagbar_map_togglefold = "x"
+let g:tagbar_map_jump = "o"
+
+" File browsing
+Bundle 'scrooloose/nerdtree.git'
+map <silent> <F8> :NERDTreeToggle<CR>
+map <silent> <Leader><F8> :NERDTreeFind<CR>
+let NERDChristmasTree=1
+let NERDTreeAutoCenter=1
+let NERDTreeMouseMode=2
+let NERDTreeShowBookmarks=1
+let NERDTreeWinPos='right'
+let NERDTreeWinSize=45
+let NERDTreeShowLineNumbers=0
+let NERDTreeIgnore=['cscope.in.out', 'cscope.out', 'cscope.files', 'cscope.po.out', 'tags', '\.swp$']
+let NERDTreeMapToggleZoom='z'
+let NERDTreeMinimalUI=1
+
+" Fuzzy search " vim-scripts repos
+Bundle 'vim-scripts/L9'
+"Bundle 'vim-scripts/FuzzyFinder'
+" let g:fuf_modesDisable = [ 'mrucmd', ]
+" map <silent> <F5> :FufFileWithFullCwd<CR>
+" map <silent> <leader>sm :FufMruFile<CR>
+Bundle 'kien/ctrlp.vim'
+
+" Grep
+"Bundle 'rking/ag.vim'
+
+" Syntax checker
+Bundle 'scrooloose/syntastic'
+let g:syntastic_error_symbol='✗'
+let g:syntastic_warning_symbol='⚠'
+map <silent> <leader>sc :SyntasticCheck<CR>
+map <silent> <leader>sr :SyntasticReset<CR>
+
+" Auto complete
+"Bundle 'Valloric/YouCompleteMe'
+
+" Snippet
+Bundle 'msanders/snipmate.vim.git'
+let g:snips_author = 'Ouyang Xiongyi <ouyangxiongyi@tp-link.net>'
+
+" Git
+Bundle  'tpope/vim-fugitive'
+
+" Misc
+Bundle 'Lokaltog/vim-easymotion.git'
+let g:EasyMotion_leader_key = '<Leader>'
+"I just enable w and j action
+let g:EasyMotion_mapping_f = ''
+let g:EasyMotion_mapping_F = ''
+let g:EasyMotion_mapping_t = ''
+let g:EasyMotion_mapping_T = ''
+let g:EasyMotion_mapping_W = ''
+let g:EasyMotion_mapping_B = ''
+let g:EasyMotion_mapping_e = ''
+let g:EasyMotion_mapping_E = ''
+let g:EasyMotion_mapping_ge = ''
+let g:EasyMotion_mapping_gE = ''
+let g:EasyMotion_mapping_j = ''
+let g:EasyMotion_mapping_k = ''
+let g:EasyMotion_mapping_n = ''
+let g:EasyMotion_mapping_N = ''
+"Bundle 'goldfeld/vim-seek'
+"Bundle 'joeytwiddle/sexy_scroller.vim'
+Bundle 'tpope/vim-markdown'
+Bundle 'tpope/vim-surround'
+Bundle 'vim-scripts/DrawIt'
+Bundle 'vim-scripts/matrix.vim--Yang'
+
+filetype plugin indent on     " required!
+
+
+
+
+
+
+
+
+"###########################
+"# Cscope setting
+"###########################
+
+if has("cscope")
+    set csto=1
+    set cst
+    set nocsverb
+    if filereadable("cscope.out")
+        cs add cscope.out
+    endif
+    set csverb
+    set cscopequickfix=s-,g-,c-,t-,e-,f-,i-,d-
+endif
+"s: Find this C symbol
+"g: Find this definition
+"c: Find functions calling this function
+"t: Find this text string
+"d: Find functions called by this function
+"e: Find this egrep pattern
+"f: Find this file
+"i: Find files #including this file
+map <C-@>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+map <C-@>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+map <C-@>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+map <C-@>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+map <C-@>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+map <C-@>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+map <C-@>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+map <C-@>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+map <F6> :cs find t<space>
+
+"###########################
+"# General
+"###########################
+
+" Something useful for myself
+set cmdheight=2
+set scrolloff=10
+
+" Return to last edit position when opening files (You want this!)
+autocmd BufReadPost *
+     \ if line("'\"") > 0 && line("'\"") <= line("$") |
+     \   exe "normal! g`\"" |
+     \ endif
+autocmd! bufwritepost .vimrc source ~/.vimrc
+set textwidth=0
+set nu
+
+" Use space to replace tab, can usb <C-V><Tab> to insert a real tab
+set expandtab
+
+set lcs=tab:>-,trail:-
+set list
+
+set fileformats=unix,dos
+set autoindent
+set tabstop=4
+set shiftwidth=4
+set fileencodings=ucs-bom,utf-8,chinese
+set showcmd
+set foldlevel=50
+set autoread
+set wildmenu
+set wildignore=*.o,*~,*.pyc
+if has('mouse')
+    set mouse=a
+endif
+
+" Search
+set incsearch
+set hlsearch
+set ignorecase
+set smartcase
+
+"###########################
+"# Status line
+"###########################
+
+" Always show the status line
+set laststatus=2
+
+" Format the status line
+set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ %=c:%c\|l:%l\ \of\ %L\|%p%%\ \ 
+"set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ --%p%%--
+
+" Returns true if paste mode is enabled
+function! HasPaste()
+    if &paste
+        return 'PASTE MODE  '
+    en
+    return ''
+endfunction
+
+"###########################
+"# Map leader
+"###########################
+map <leader>ss :source ~/.vimrc<CR>:noh<CR>
+map <leader>ee :e ~/.vimrc<CR>
+map <leader><CR> :noh<CR>
+map <leader>a A
+map <leader>q :qa!<CR>
+
+" Remove the Windows ^M - when the encodings gets messed up
+noremap <Leader>fm mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
+
+" Strip space, and fix some bug at the same time
+map <leader>fs mmHmt:%s/ *$//ge<CR>'tzt'm:noh<CR>
+
+" Use four spaces to replace a tab
+map <leader>ft :retab<CR>
+
+" Copy to CLIPBOARD, and use 'y' to copy to the PRIMARY
+map <leader>y "+y
+map <leader>p "+p
+
+" Switch CWD
+map <leader>cd :cd %:p:h<CR>:call GetCwd()<CR>
+
+" Reload cscope and lookup database
+map <leader>rl :cs add cscope.out<CR>:let g:LookupFile_TagExpr = '"./filenametags"'<CR>
+
+" When you press gv you vimgrep after the selected text
+vmap <leader>gv :call VisualSelection('gv')<CR>
+
+" Open vimgrep and put the cursor in the right position
+nmap <leader>gv :vimgrep // **/*.<left><left><left><left><left><left><left>
+
+" When you press <leader>r you can search and replace the selected text
+" append /g to the end to replace all
+vmap <leader>r :call VisualSelection('replace')<CR>
+
+" Useful mappings for managing tabs
+map <leader>tn :tabnew<cr>
+map <leader>to :tabonly<cr>
+map <leader>tc :tabclose<cr>
+map <leader>tm :tabmove
+
+" memo
+"set scb
+"set noscb
+
+"###########################
+"# Normal map
+"###########################
+
+" save all files
+noremap W :wa<CR>
+
+" Move between windows
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+map <C-h> <C-w>h
+
+" replaced by <C-c>
+nmap - ^
+nmap = $
+vmap - ^
+vmap = $
+
+" use Q for recording
+noremap q <Nop>
+noremap Q q
+
+" Open a fully width quickfix window at the bottom of vim
+map <F9> :botright cwindow<CR>
+
+map <F3> :cp<CR>
+map <F4> :cn<CR>
+
+" Highlighting all the same word under the cursor, like use SI.
+nmap <S-F8> /\C\<<C-R>=expand("<cword>")<CR>\><CR>N
+
+" Highlighting all the same string according to current selection
+vnoremap <S-F8> :call VisualSelection('f')<CR>
+
+" Look up dictionary
+nmap ? :!sdcv <C-R>=expand("<cword>")<CR><CR>
+vmap ? :call VisualSelection('?')<CR><CR>
+
+" Auto convert a word to a shell variable
+imap <C-h> <ESC>bi${<ESC>ea}
+imap <C-g> <ESC>bi$(<ESC>ea)
+
+" jump to the match brace
+map ]] ]}
+map [[ [{
+
+" temporary macro
+imap <F2> 	a
+
+"###########################
+" Color
+"###########################
+
+"terminal background color: #333333
+set t_Co=256
+colorscheme darkburn_ie7
+syntax enable
+
+"###########################
+"# lookupfile setting
+"###########################
+
+let g:LookupFile_MinPatLength = 2               "最少输入2个字符才开始查找
+let g:LookupFile_PreserveLastPattern = 0        "不保存上次查找的字符串
+let g:LookupFile_PreservePatternHistory = 1     "保存查找历史
+let g:LookupFile_AlwaysAcceptFirst = 1          "回车打开第一个匹配项目
+let g:LookupFile_AllowNewFiles = 0              "不允许创建不存在的文件
+if filereadable("./filenametags")                "设置tag文件的名字
+    let g:LookupFile_TagExpr = '"./filenametags"'
+endif
+
+"###########################
+"# Helper functions
+"###########################
+function! CmdLine(str)
+    exe "menu Foo.Bar :" . a:str
+    emenu Foo.Bar
+    unmenu Foo
+endfunction
+
+function! VisualSelection(direction) range
+    let l:saved_reg = @"
+    execute "normal! vgvy"
+
+    let l:pattern = escape(@", '\\/.*$^~[]')
+    let l:pattern = substitute(l:pattern, "\n$", "", "")
+
+    if a:direction == 'b'
+        execute "normal ?" . l:pattern . "^M"
+    elseif a:direction == 'gv'
+        call CmdLine("vimgrep " . '/'. l:pattern . '/' . ' **/*.')
+    elseif a:direction == 'replace'
+        call CmdLine("%s" . '/'. l:pattern . '/')
+    elseif a:direction == 'f'
+        execute "normal /" . l:pattern . "^M"
+    elseif a:direction == '?'
+        call CmdLine("!sdcv " . l:pattern)
+    endif
+
+    let @/ = l:pattern
+    let @" = l:saved_reg
+endfunction
+
+function! GetCwd()
+    let l:cwd = getcwd()
+    call CmdLine("cd " . l:cwd)
+endfunction
+
+" Returns true if paste mode is enabled
+function! HasPaste()
+    if &paste
+        return 'PASTE MODE  '
+    en
+    return ''
+endfunction

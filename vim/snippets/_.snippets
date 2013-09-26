@@ -1,0 +1,57 @@
+# Global snippets
+
+# (c) holds no legal value ;)
+snippet cc)
+	/*
+	 * Copyright (C) `strftime("%Y")`, TP-LINK TECHNOLOGIES CO., LTD.
+	 *
+	 * Description: ${1}
+	 *
+	 * Author: `g:snips_author`
+	 *
+	 * Changes:
+	 * 	    OuyangXY: Create file, `strftime("%Y-%m-%d")`
+	 */
+	 ${2}
+
+snippet ss)
+	#!${1}/bin/sh
+	#
+	# Copyright (C) `strftime("%Y")`, TP-LINK TECHNOLOGIES CO., LTD.
+	#
+	# Description: ${2}
+	#
+	# Author: `g:snips_author`
+	#
+	# Changes:
+	#       OuyangXY: Create file, `strftime("%Y-%m-%d")`
+	${3}
+
+snippet ME
+	`g:snips_author`
+snippet me
+	OuyangXY
+snippet /*
+	/* ${1} */
+snippet /**
+	/*
+	 * ${1}
+	 */
+snippet /*f
+	/**
+	 * ${1:/* func */}() - ${2:/* description */}
+	 * @para1: ...
+	 *
+	 * ...
+	 */
+snippet /*s
+	/**
+	 * ${1:/* struct */} - ${2:/* description */}
+	 * @mem1: ...
+	 *
+	 * ...
+	 */
+snippet {
+	{
+	    ${1}
+	}

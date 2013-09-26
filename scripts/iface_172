@@ -1,0 +1,10 @@
+#!/bin/bash
+
+NET_PATH="/etc/network"
+
+sudo rm $NET_PATH/interfaces
+sudo cp $NET_PATH/interfaces_172 $NET_PATH/interfaces
+sudo ifdown eth0
+sudo ifup eth0
+
+dns

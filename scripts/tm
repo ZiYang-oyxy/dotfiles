@@ -1,0 +1,13 @@
+#!/bin/bash
+
+COUNT=1
+
+while :
+do
+    echo "#### ${COUNT} ####"
+
+    echo "#### ${COUNT} ####" >> ${HOME}/tm.log
+    tc -s qdisc >> ${HOME}/tm.log
+    sleep 1
+    COUNT=`expr $COUNT + 1`
+done

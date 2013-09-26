@@ -1,0 +1,9 @@
+[user]
+    name = Ouyang Xiongyi
+    email = hh123okbb@gmail.com
+[color]
+        ui = always
+[diff]
+        tool = vimdiff
+[difftool]
+        prompt = false

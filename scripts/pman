@@ -1,0 +1,3 @@
+#!/bin/bash
+
+python -c "help($1)"

@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [ "$1" = "" ]; then
+    echo -n "Input pattern:"
+    read PATTERN
+else
+    PATTERN="$1"
+fi
+
+find . -name "*" | xargs grep -s --color "${PATTERN}" | grep --color "${PATTERN}"
