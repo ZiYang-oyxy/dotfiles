@@ -72,6 +72,7 @@ let g:snips_author = 'Ouyang Xiongyi <ouyangxiongyi@tp-link.net>'
 
 " Git
 Bundle  'tpope/vim-fugitive'
+Bundle  'airblade/vim-gitgutter'
 
 " Misc
 Bundle 'Lokaltog/vim-easymotion.git'
