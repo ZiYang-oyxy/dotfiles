@@ -27,7 +27,7 @@ case $TARGET in
         FLASH_SIZE=4M
         ;;
     13U02)
-        ROOT_PATH="mr13u"
+        ROOT_PATH="mr12u"
         # refer from Makefile.product
         PREFIX="mr13uv2_cn"
         FLASH_SIZE=8M

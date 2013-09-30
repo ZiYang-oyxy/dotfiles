@@ -1,9 +1,12 @@
 [user]
-    name = Ouyang Xiongyi
-    email = hh123okbb@gmail.com
+	name = Ouyang Xiongyi
+    email = ouyangxiongyi@tp-link.net
 [color]
         ui = always
 [diff]
         tool = vimdiff
 [difftool]
         prompt = false
+[alias]
+        s = status
+        d = diff
