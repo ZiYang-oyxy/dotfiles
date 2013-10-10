@@ -117,7 +117,8 @@ fi
 
 export PATH=~/bin:~/android-sdk_r20-linux/platform-tools:~/scripts:$PATH
 export ANDROID_SDK_PLATFORM_TOOLS=~/android-sdk_r20-linux/platform-tools
-export HANSSH="ssh -CNvg -D 127.0.0.1:9090 ie7@10.1.2.1"
+export HANSSH="ssh -CNvg -D 127.0.0.1:9090 ie7@10.8.8.1"
+export HTTPSSH="ssh -CNvg -L 9999:10.8.8.1:9999 ie7@10.8.8.1"
 
 
 

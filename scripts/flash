@@ -7,6 +7,8 @@ else
     TARGET="$1"
 fi
 
+TR781_OUT=~/tr781/out/debug/target/product/tr781
+
 case $TARGET in
     tr781)
         TARGET_IMAGE="$TR781_OUT/2kpagenand_images"

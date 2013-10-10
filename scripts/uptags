@@ -39,5 +39,6 @@ esac
 # Generate cscope database & tags
 cscope -Rbkq -i cscope.files
 ctags --c++-kinds=+p --fields=+iaS --extra=+q -L cscope.files
+#ctags --c++-kinds=+p --fields=+iaS --extra=+q -R
 
 exit 0
