@@ -57,7 +57,7 @@ Bundle 'kien/ctrlp.vim'
 "Bundle 'rking/ag.vim'
 
 " Syntax checker
-Bundle 'scrooloose/syntastic'
+"Bundle 'scrooloose/syntastic'
 let g:syntastic_error_symbol='✗'
 let g:syntastic_warning_symbol='⚠'
 map <silent> <leader>sc :SyntasticCheck<CR>
@@ -72,7 +72,7 @@ let g:snips_author = 'Ouyang Xiongyi <ouyangxiongyi@tp-link.net>'
 
 " Git
 Bundle  'tpope/vim-fugitive'
-Bundle  'airblade/vim-gitgutter'
+"Bundle  'airblade/vim-gitgutter'
 
 " Misc
 Bundle 'Lokaltog/vim-easymotion.git'
@@ -100,13 +100,6 @@ Bundle 'vim-scripts/DrawIt'
 Bundle 'vim-scripts/matrix.vim--Yang'
 
 filetype plugin indent on     " required!
-
-
-
-
-
-
-
 
 "###########################
 "# Cscope setting
@@ -158,7 +151,7 @@ set textwidth=0
 set nu
 
 " Use space to replace tab, can usb <C-V><Tab> to insert a real tab
-set expandtab
+"set expandtab
 
 set lcs=tab:>-,trail:-
 set list
@@ -308,19 +301,6 @@ imap <F2> 	a
 set t_Co=256
 colorscheme darkburn_ie7
 syntax enable
-
-"###########################
-"# lookupfile setting
-"###########################
-
-let g:LookupFile_MinPatLength = 2               "最少输入2个字符才开始查找
-let g:LookupFile_PreserveLastPattern = 0        "不保存上次查找的字符串
-let g:LookupFile_PreservePatternHistory = 1     "保存查找历史
-let g:LookupFile_AlwaysAcceptFirst = 1          "回车打开第一个匹配项目
-let g:LookupFile_AllowNewFiles = 0              "不允许创建不存在的文件
-if filereadable("./filenametags")                "设置tag文件的名字
-    let g:LookupFile_TagExpr = '"./filenametags"'
-endif
 
 "###########################
 "# Helper functions

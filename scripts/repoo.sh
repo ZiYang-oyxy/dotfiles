@@ -8,8 +8,11 @@ else
 fi
 
 case $TARGET in
-    13U02)
-        wget http://git.tp-link.net/jenkins/view/Linux/job/MR13U_V2.0-REL/lastSuccessfulBuild/artifact/proprietary.tar.gz
+    13U02-REL)
+        wget http://git.tp-link.net/jenkins/view/Linux/job/MR12U_V2.0/lastSuccessfulBuild/artifact/proprietary.tar.gz
+        ;;
+    12U02-REL)
+        wget http://git.tp-link.net/jenkins/view/Linux/job/MR12U_V2.0/lastSuccessfulBuild/artifact/proprietary.tar.gz
         ;;
     *)
         echo "unknow target:$TARGET"

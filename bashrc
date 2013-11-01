@@ -117,38 +117,45 @@ fi
 
 export PATH=~/bin:~/android-sdk_r20-linux/platform-tools:~/scripts:$PATH
 export ANDROID_SDK_PLATFORM_TOOLS=~/android-sdk_r20-linux/platform-tools
-export HANSSH="ssh -CNvg -D 127.0.0.1:9090 ie7@10.8.8.1"
 export HTTPSSH="ssh -CNvg -L 9999:10.8.8.1:9999 ie7@10.8.8.1"
 
-
+function hanssh()
+{
+    sudo hans -c 106.186.28.188 -p wtmjsysww -n ie7
+	sleep 1
+    ssh -CNvg -D 127.0.0.1:9090 ie7@10.8.8.1
+}
 
 
 ### advanced grep ###
+function xfind()
+{
+    find . -name .repo -prune -o -name .git -prune -o  -type f -name "*$@*" -print
+}
 
-case `uname -s` in
-    Darwin)
-        function sgrep()
-        {
-            find -E . -name .repo -prune -o -name .git -prune -o  -type f -iregex '.*\.(c|h|cpp|S|java|xml|sh|mk)' -print0 | xargs -0 grep --color -n "$@"
-        }
-
-        ;;
-    *)
-        function sgrep()
-        {
-            find . -name .repo -prune -o -name .git -prune -o  -type f -iregex '.*\.\(c\|h\|cpp\|S\|java\|xml\|sh\|mk\)' -print0 | xargs -0 grep --color -n "$@"
-        }
-        ;;
-esac
+function xfindi()
+{
+    find . -name .repo -prune -o -name .git -prune -o  -type f -iname "*$@*" -print
+}
 
 function jgrep()
 {
     find . -name .repo -prune -o -name .git -prune -o  -type f -name "*\.java" -print0 | xargs -0 grep --color -n "$@"
 }
 
+function jgrepi()
+{
+    find . -name .repo -prune -o -name .git -prune -o  -type f -name "*\.java" -print0 | xargs -0 grep -i --color -n "$@"
+}
+
 function cgrep()
 {
-    find . -name .repo -prune -o -name .git -prune -o -type f \( -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.h' -o -name '*.inl' \) -print0 | xargs -0 grep --color -n "$@"
+    find . -name .repo -prune -o -name .git -prune -o -type f \( -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.h' \) -print0 | xargs -0 grep --color -n "$@"
+}
+
+function cgrepi()
+{
+    find . -name .repo -prune -o -name .git -prune -o -type f \( -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.h' \) -print0 | xargs -0 grep -i --color -n "$@"
 }
 
 function resgrep()
@@ -156,29 +163,28 @@ function resgrep()
     for dir in `find . -name .repo -prune -o -name .git -prune -o -name res -type d`; do find $dir -type f -name '*\.xml' -print0 | xargs -0 grep --color -n "$@"; done;
 }
 
-case `uname -s` in
-    Darwin)
-        function mgrep()
-        {
-            find -E . -name .repo -prune -o -name .git -prune -o  -type f -iregex '.*/(Makefile|Makefile\..*|.*\.make|.*\.mak|.*\.mk)' -print0 | xargs -0 grep --color -n "$@"
-        }
+function resgrepi()
+{
+    for dir in `find . -name .repo -prune -o -name .git -prune -o -name res -type d`; do find $dir -type f -name '*\.xml' -print0 | xargs -0 grep -i --color -n "$@"; done;
+}
 
-        function treegrep()
-        {
-            find -E . -name .repo -prune -o -name .git -prune -o -type f -iregex '.*\.(c|h|cpp|S|java|xml)' -print0 | xargs -0 grep --color -n -i "$@"
-        }
+# Makefile
+function mgrep()
+{
+    find . -name .repo -prune -o -name .git -prune -o  -type f \( -name "Makefile" -o -name '*.mk' \) -print0 | xargs -0 grep --color -n "$@"
+}
 
-        ;;
-    *)
-        function mgrep()
-        {
-            find . -name .repo -prune -o -name .git -prune -o -regextype posix-egrep -iregex '(.*\/Makefile|.*\/Makefile\..*|.*\.make|.*\.mak|.*\.mk)' -type f -print0 | xargs -0 grep --color -n "$@"
-        }
+function mgrepi()
+{
+    find . -name .repo -prune -o -name .git -prune -o  -type f \( -name "Makefile" -o -name '*.mk' \) -print0 | xargs -0 grep -i --color -n "$@"
+}
 
-        function treegrep()
-        {
-            find . -name .repo -prune -o -name .git -prune -o -regextype posix-egrep -iregex '.*\.(c|h|cpp|S|java|xml)' -type f -print0 | xargs -0 grep --color -n -i "$@"
-        }
+function xgrep()
+{
+    find . -name .repo -prune -o -name .git -prune -o  -type f -name "*" -print0 | xargs -0 grep --color -n "$@"
+}
 
-        ;;
-esac
+function xgrepi()
+{
+    find . -name .repo -prune -o -name .git -prune -o  -type f -name "*" -print0 | xargs -0 grep -i --color -n "$@"
+}
