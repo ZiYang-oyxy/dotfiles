@@ -147,6 +147,8 @@ autocmd BufReadPost *
      \   exe "normal! g`\"" |
      \ endif
 autocmd! bufwritepost .vimrc source ~/.vimrc
+autocmd BufEnter * let &titlestring = ' ' . expand("%:t")
+set title
 set textwidth=0
 set nu
 
