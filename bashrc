@@ -66,17 +66,16 @@ else
 fi
 unset color_prompt force_color_prompt
 
-# for tmux
-PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
-
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
 xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)} \w\a\]$PS1"
     ;;
 *)
     ;;
 esac
+
+PROMPT_COMMAND='echo -ne "\033]0;\007"'
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
