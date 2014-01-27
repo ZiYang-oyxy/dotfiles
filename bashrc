@@ -121,9 +121,16 @@ export HTTPSSH="ssh -CNvg -L 9999:10.8.8.1:9999 ie7@10.8.8.1"
 
 function hanssh()
 {
-    sudo hans -c 106.186.28.188 -p wtmjsysww -n ie7
-	sleep 1
+    sudo hans -c 106.186.28.188 -p wtmjsysww -n ie7 -m 1000
+    sleep 1
     ssh -CNvg -D 127.0.0.1:9090 ie7@10.8.8.1
+}
+
+function hanssh1()
+{
+    sudo hans -c 106.186.28.188 -p wtmjsysww -m 1000
+    sleep 1
+    ssh -CNvg -D 127.0.0.1:9090 ie7@10.20.20.1
 }
 
 
@@ -187,4 +194,10 @@ function xgrep()
 function xgrepi()
 {
     find . -name .repo -prune -o -name .git -prune -o  -type f -name "*" -print0 | xargs -0 grep -i --color -n "$@"
+}
+
+function ethrestart()
+{
+    sudo ifdown eth0 && sudo ifup eth0
+   # sudo ifdown eth1 && sudo ifup eth1
 }

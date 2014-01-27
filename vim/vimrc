@@ -21,7 +21,7 @@ Bundle 'gmarik/vundle.git'
 " Tags
 Bundle 'majutsushi/tagbar.git'
 map <silent> <F7> :TagbarToggle<CR>
-set updatetime=2000
+set updatetime=500
 let g:tagbar_left = 1
 let g:tagbar_width = 30
 let g:tagbar_compact = 1
@@ -99,6 +99,15 @@ Bundle 'tpope/vim-surround'
 Bundle 'vim-scripts/DrawIt'
 Bundle 'vim-scripts/matrix.vim--Yang'
 
+Bundle 'altercation/vim-colors-solarized.git'
+"terminal background color: #333333
+"set background=dark
+"set background=light
+set t_Co=256
+"colorscheme solarized
+colorscheme darkburn_ie7
+syntax on
+
 filetype plugin indent on     " required!
 
 "###########################
@@ -151,7 +160,7 @@ set textwidth=0
 set nu
 
 " Use space to replace tab, can usb <C-V><Tab> to insert a real tab
-"set expandtab
+set expandtab
 
 set lcs=tab:>-,trail:-
 set list
@@ -292,15 +301,6 @@ map [[ [{
 
 " temporary macro
 imap <F2> 	a
-
-"###########################
-" Color
-"###########################
-
-"terminal background color: #333333
-set t_Co=256
-colorscheme darkburn_ie7
-syntax enable
 
 "###########################
 "# Helper functions
