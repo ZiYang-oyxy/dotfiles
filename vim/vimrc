@@ -41,7 +41,7 @@ let NERDTreeShowBookmarks=1
 let NERDTreeWinPos='right'
 let NERDTreeWinSize=45
 let NERDTreeShowLineNumbers=0
-let NERDTreeIgnore=['\cscope.in.out$', '\cscope.out$', '\cscope.files$', '\cscope.po.out$', '\tags$', '\.swp$']
+let NERDTreeIgnore=['^cscope.out.in$', '^cscope.out$', '^cscope.files$', '^cscope.out.po$', '^tags$', '^.swp$']
 let NERDTreeMapToggleZoom='z'
 let NERDTreeMinimalUI=1
 
