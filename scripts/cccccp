@@ -7,27 +7,30 @@ else
     TARGET="$1"
 fi
 
+SERIES="ap121"
+
 case $TARGET in
     12U01)
-        ROOT_PATH="mr12u"
+        ROOT_PATH="mr1xu-dev"
         # refer from Makefile.product
         PREFIX="mr12uv1_cn"
         FLASH_SIZE=4M
         ;;
     12U02)
-        ROOT_PATH="mr12u"
+        #ROOT_PATH="mr12u"
+        ROOT_PATH="mr1xu-dev"
         # refer from Makefile.product
         PREFIX="mr12uv2_cn"
         FLASH_SIZE=4M
         ;;
     13U01)
-        ROOT_PATH="mr12u"
+        ROOT_PATH="mr1xu-dev"
         # refer from Makefile.product
         PREFIX="mr13uv1_cn"
         FLASH_SIZE=4M
         ;;
     13U02)
-        ROOT_PATH="mr12u"
+        ROOT_PATH="mr1xu-dev"
         # refer from Makefile.product
         PREFIX="mr13uv2_cn"
         FLASH_SIZE=8M
@@ -37,13 +40,19 @@ case $TARGET in
         PREFIX=tr863v1_cn
         FLASH_SIZE=8M
         ;;
+    22U01)
+        ROOT_PATH="mr22u"
+        PREFIX="mr22uv1_cn"
+        FLASH_SIZE=8M
+        SERIES="ap143"
+        ;;
     *)
         echo "unknow target:$TARGET"
         exit 1
         ;;
 esac
 
-SOURCE_PATH="${HOME}/${ROOT_PATH}/images/ap121"
+SOURCE_PATH="${HOME}/${ROOT_PATH}/images/${SERIES}"
 
 TIME=`date +%y%m%d`
 

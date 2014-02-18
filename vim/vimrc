@@ -41,7 +41,7 @@ let NERDTreeShowBookmarks=1
 let NERDTreeWinPos='right'
 let NERDTreeWinSize=45
 let NERDTreeShowLineNumbers=0
-let NERDTreeIgnore=['cscope.in.out', 'cscope.out', 'cscope.files', 'cscope.po.out', 'tags', '\.swp$']
+let NERDTreeIgnore=['\cscope.in.out$', '\cscope.out$', '\cscope.files$', '\cscope.po.out$', '\tags$', '\.swp$']
 let NERDTreeMapToggleZoom='z'
 let NERDTreeMinimalUI=1
 
@@ -194,6 +194,9 @@ set hlsearch
 set ignorecase
 set smartcase
 
+" persistent undo
+set undofile
+
 "###########################
 "# Status line
 "###########################
@@ -238,8 +241,8 @@ map <leader>p "+p
 " Switch CWD
 map <leader>cd :cd %:p:h<CR>:call GetCwd()<CR>
 
-" Reload cscope and lookup database
-map <leader>rl :cs add cscope.out<CR>:let g:LookupFile_TagExpr = '"./filenametags"'<CR>
+" Reload cscope
+map <leader>rl :cs add cscope.out<CR>
 
 " When you press gv you vimgrep after the selected text
 vmap <leader>gv :call VisualSelection('gv')<CR>
