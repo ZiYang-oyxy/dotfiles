@@ -105,6 +105,7 @@ Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-surround'
 Bundle 'vim-scripts/DrawIt'
 Bundle 'vim-scripts/matrix.vim--Yang'
+Bundle 'vim-scripts/IndexedSearch'
 
 Bundle 'altercation/vim-colors-solarized.git'
 "terminal background color: #333333
@@ -169,7 +170,7 @@ set textwidth=0
 set nu
 
 " Use space to replace tab, can usb <C-V><Tab> to insert a real tab
-set expandtab
+"set expandtab
 
 set lcs=tab:>-,trail:-
 set list
