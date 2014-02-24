@@ -93,6 +93,8 @@ all_sources()
 		find_sources $arch '*.[chS]'
 	done
 	find_other_sources '*.[chS]'
+
+	find_other_sources '*.cpp'
 }
 
 all_kconfigs()
