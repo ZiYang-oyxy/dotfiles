@@ -300,8 +300,8 @@ nmap <S-F8> /\C\<<C-R>=expand("<cword>")<CR>\><CR>N
 " Highlighting all the same string according to current selection
 vnoremap <S-F8> :call VisualSelection('f')<CR>
 
-" Look up dictionary
-nmap ? :!sdcv <C-R>=expand("<cword>")<CR><CR>
+" Look up dictionary, cover IndexedSearch's map
+autocmd! VimEnter * :nnoremap ? :!sdcv <C-R>=expand("<cword>")<CR><CR>
 vmap ? :call VisualSelection('?')<CR><CR>
 
 " Auto convert a word to a shell variable
