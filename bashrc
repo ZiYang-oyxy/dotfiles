@@ -128,7 +128,7 @@ function hanssh()
 
 function hanssh1()
 {
-    ssh -CNvg -D 127.0.0.1:1010 ie7@106.186.28.188
+    ssh -CNvg -D 127.0.0.1:9090 ie7@106.186.28.188
 }
 
 
