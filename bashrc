@@ -115,7 +115,7 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-export PATH=~/bin:~/android-sdk_r20-linux/platform-tools:~/scripts:$PATH
+export PATH=/sbin:~/bin:~/android-sdk_r20-linux/platform-tools:~/scripts:$PATH
 export ANDROID_SDK_PLATFORM_TOOLS=~/android-sdk_r20-linux/platform-tools
 export HTTPSSH="ssh -CNvg -L 9999:10.8.8.1:9999 ie7@10.8.8.1"
 
@@ -128,9 +128,7 @@ function hanssh()
 
 function hanssh1()
 {
-    sudo hans -c 106.186.28.188 -p wtmjsysww -m 1000
-    sleep 1
-    ssh -CNvg -D 127.0.0.1:9090 ie7@10.20.20.1
+    ssh -CNvg -D 127.0.0.1:1010 ie7@106.186.28.188
 }
 
 

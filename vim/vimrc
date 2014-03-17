@@ -58,6 +58,7 @@ let g:ctrlp_use_caching = 20
 let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_regexp = 1
 let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:40'
+let g:ctrlp_max_files = 0
 
 
 " Grep
@@ -148,7 +149,7 @@ map <C-@>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 map <C-@>e :cs find e <C-R>=expand("<cword>")<CR><CR>
 map <C-@>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
 map <C-@>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-map <F6> :cs find t<space>
+map <F6> :cs find d<space>
 
 "###########################
 "# General
@@ -177,8 +178,8 @@ set list
 
 set fileformats=unix,dos
 set autoindent
-set tabstop=4
-set shiftwidth=4
+"set tabstop=4
+"set shiftwidth=4
 set fileencodings=ucs-bom,utf-8,chinese
 set showcmd
 set foldlevel=50
@@ -261,10 +262,6 @@ map <leader>to :tabonly<cr>
 map <leader>tc :tabclose<cr>
 map <leader>tm :tabmove
 
-" memo
-"set scb
-"set noscb
-
 "###########################
 "# Normal map
 "###########################
@@ -312,8 +309,7 @@ imap <C-g> <ESC>bi$(<ESC>ea)
 map ]] ]}
 map [[ [{
 
-" temporary macro
-imap <F2> 	a
+nnoremap mm mA
 
 "###########################
 "# Helper functions
