@@ -10,3 +10,5 @@
 [alias]
         s = status
         d = diff
+[core]
+	excludesfile = /home/ouyangxy/.gitignore
