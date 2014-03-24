@@ -211,11 +211,11 @@ case "$1" in
 		;;
 
 	"-c")
-		rm -f tags cscope.in.out cscope.out cscopt.files cscope.po.out
+		rm -f tags cscope.out.po cscope.out.in cscope.out cscopt.files
 		;;
 
 	*)
-		rm -f tags cscope.in.out cscope.out cscopt.files cscope.po.out
+		rm -f tags cscope.out.po cscope.out.in cscope.out cscopt.files
 		docscope
 		xtags ctags
 		;;

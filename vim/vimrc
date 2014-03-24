@@ -178,8 +178,8 @@ set list
 
 set fileformats=unix,dos
 set autoindent
-"set tabstop=4
-"set shiftwidth=4
+set tabstop=4
+set shiftwidth=4
 set fileencodings=ucs-bom,utf-8,chinese
 set showcmd
 set foldlevel=50

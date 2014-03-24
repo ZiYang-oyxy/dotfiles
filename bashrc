@@ -196,6 +196,13 @@ function xgrepi()
 
 function ethrestart()
 {
-    sudo ifdown eth0 && sudo ifup eth0
+    sudo ifdown eth0
+	sleep 1
+	sudo ifup eth0
    # sudo ifdown eth1 && sudo ifup eth1
+}
+
+function iqos_make_flash()
+{
+	/home/ouyangxy/mr22u/build/../util/iqos_make_flash -b u-boot.bin -k vmlinux.bin.gz -f ap143-squashfs -o iqos_demo -c /home/ouyangxy/mr22u/build/../webs/models/model_tmp.conf -d database.bin -t /home/ouyangxy/mr22u/build/../web_server/sys/buildtime.h && chmod 777 *
 }

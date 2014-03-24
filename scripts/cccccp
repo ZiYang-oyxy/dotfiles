@@ -46,6 +46,12 @@ case $TARGET in
         FLASH_SIZE=8M
         SERIES="ap143"
         ;;
+    iqos_demo)
+        ROOT_PATH="mr22u"
+        PREFIX="iqos_demo"
+        FLASH_SIZE=4M
+        SERIES="ap143"
+		;;
     *)
         echo "unknow target:$TARGET"
         exit 1
