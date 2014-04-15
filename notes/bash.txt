@@ -1,0 +1,58 @@
+ABS READING NOTE
+================
+
++ ,
+	1 let "t2 = ((a = 9, 15 / 3))" # Set "a = 9" and "t2 = 15 / 3"
+
++ ,
+for file in /{,usr/}bin/*calc
+# Find all executable files ending in "calc"
+# in /bin and /usr/bin directories.
+
++ :
+It may be considered a synonym for the shell builtin true. The ":" command is itself a Bash builtin, and
+its exit status is true (0).
+	while true # equal while :
+
++ :
+	: ${HOSTNAME?} ${USER?} ${MAIL?}
+	# Prints error message
+	#+ if one or more of essential environmental variables not set.
+
++ :
+	: > data.xxx
+	# File "data.xxx" now empty.
+	# Same effect as
+	cat /dev/null >data.xxx
+	# However, this does not fork a new process, since ":" is a builtin.
+
++ *
+	echo "Using *"; echo
+	for filename in *
+	do
+	echo "$filename"
+	done
+	# Lists only files in current directory ($PWD).
+	echo; echo "--------------"; echo
+	echo "Using **"
+	for filename in **
+	do
+	echo "$filename"
+	done
+	# Lists complete file tree, recursively.
+
++ ? 
+In a double-parentheses construct, the ? can serve as an element of a C-style trinary operator.
+	(( var0 = var1<98?9:21 ))
+
++ $'...'
+The $' ... ' quoted string-expansion construct is a mechanism that uses escaped
+octal or hex values to assign ASCII characters to variables, e.g., quote=$'\042'.
+
++ $$
+process ID variable. The $$ variable holds the process ID [19] of the script in which it appears.
+	echo $$$$$$$ # Output "<PID><PID><PID>$"
+
++ ()
+A listing of commands within parentheses starts a _subshell_.
+	(a=hello; echo $a)

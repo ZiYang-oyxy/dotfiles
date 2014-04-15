@@ -80,4 +80,5 @@ else
 #    echo "setenv ipaddr 192.168.1.1;set serverip 192.168.1.100;tftp 80800000 ${IMG_NAME};erase 9f000000 +800000;cp.b 80800000 9f000000 800000;tftp 80800000 cal_back.bin;erase 9f7f0000 +10000;cp.b 80800000 9f7f0000 10000;bootm;"
 #else
 #    echo "setenv ipaddr 192.168.1.1;set serverip 192.168.1.100;tftp 80800000 ${IMG_NAME};erase 9f000000 +400000;cp.b 80800000 9f000000 400000;tftp 80800000 cal_back.bin;erase 9f3f0000 +10000;cp.b 80800000 9f3f0000 10000;bootm;"
+#setenv ipaddr 192.168.1.1;set serverip 192.168.1.100;tftp 80800000 up.bin;erase 9f020000 +3c0000;cp.b 80800000 9f020000 3c0000;bootm;
 fi
