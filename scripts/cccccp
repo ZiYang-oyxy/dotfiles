@@ -52,6 +52,12 @@ case $TARGET in
         FLASH_SIZE=4M
         SERIES="ap143"
 		;;
+    tpmini)
+        ROOT_PATH="xiaobai"
+        PREFIX="tpminiv2_cn"
+        FLASH_SIZE=4M
+        SERIES="ap143"
+        ;;
     *)
         echo "unknow target:$TARGET"
         exit 1

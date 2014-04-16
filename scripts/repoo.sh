@@ -17,6 +17,9 @@ case $TARGET in
     22U-REL)
         wget http://git.tp-link.net/jenkins/view/Linux/job/MR22U-REL/lastSuccessfulBuild/artifact/proprietary.tar.gz
         ;;
+    TPmini2_Router)
+        wget http://git.tp-link.net/jenkins/view/Linux/job/TPmini2_Router/lastSuccessfulBuild/artifact/proprietary.tar.gz
+        ;;
     *)
         echo "unknow target:$TARGET"
         exit 1
