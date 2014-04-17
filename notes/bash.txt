@@ -56,3 +56,45 @@ process ID variable. The $$ variable holds the process ID [19] of the script in 
 + ()
 A listing of commands within parentheses starts a _subshell_.
 	(a=hello; echo $a)
+
+array initialization.
+    Array=(element1 element2 element3)
+
++ {xxx,yyy,zzz,...}
+    cat aaa{a,b,c} > b # equal cat aaaa aaab aaac > b
+
+#No spaces allowed within the braces unless the spaces are quoted or escaped.
+    echo {file1,file2}\ :{\ A," B",' C'}
+    #file1 : A file1 : B file1 : C file2 : A file2 : B file2 : C
+
+    echo {a..z} # a b c d e f g h i j k l m n o p q r s t u v w x y z
+
+# Initializing an array, using extended brace expansion.
+    base64_charset=( {A..Z} {a..z} {0..9} + / = )
+
+# Placeholder for text
+ls . | xargs -i -t rm my_dir1/my_dir2/{}
+
++ xargs
+Because Unix filenames can contain blanks and newlines, this default behaviour is often  problematic;  file‐
+names  containing blanks and/or newlines are incorrectly processed by xargs.  In these situations it is bet‐
+ter to use the -0 option, which prevents such problems.   When using this option you  will  need  to  ensure
+that the program which produces the input for xargs also uses a null character as a separator.  If that pro‐
+gram is GNU find for example, the -print0 option does this for you.
+
+   find /tmp -name core -type f -print | xargs /bin/rm -f
+
+Find  files named core in or below the directory /tmp and delete them.  Note that this will work incorrectly
+if there are any filenames containing newlines or spaces.
+
+   find /tmp -name core -type f -print0 | xargs -0 /bin/rm -f
+
+Find files named core in or below the directory /tmp and delete them, processing filenames  in  such  a  way
+that file or directory names containing spaces or newlines are correctly handled.
+
++ (())
+Evaluate integer expression between $[ ].
+    a=3
+    b=7
+    echo (($a+$b)) # 10
+    echo (($a*$b)) # 21
