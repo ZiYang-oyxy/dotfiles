@@ -93,8 +93,61 @@ Find files named core in or below the directory /tmp and delete them, processing
 that file or directory names containing spaces or newlines are correctly handled.
 
 + (())
-Evaluate integer expression between $[ ].
+Evaluate integer expression between ((...)).
     a=3
     b=7
-    echo (($a+$b)) # 10
+    echo (($a+$b)) # 10 $[...] is deprecated
     echo (($a*$b)) # 21
+
++ &>
+This is useful for suppressing output when testing for a condition. For example, let us
+test whether a certain command exists.
+    type bogus_command &>/dev/null
+    echo $?
+
++ 
+#-------------------------------------------------------------------------
+# No space permitted on either side of = sign when initializing variables.
+# What happens if there is a space?
+# "VARIABLE =value"
+#
+#% Script tries to run "VARIABLE" command with one argument, "=value".
+# "VARIABLE= value"
+#
+#% Script tries to run "value" command with
+#+ the environmental variable "VARIABLE" set to "".
+#-------------------------------------------------------------------------
+
++ 
+# =======================================
+# Quoting a variable preserves whitespace.
+# =======================================
+# Notice the effect of different types of quoting.
+    hello="A B C   D"
+    hello=A B C   D # gives an error
+    hello=A\ B\ C\ \ \ D # also works
+    echo $hello # A B C D
+    echo "$hello" # A B C   D
+    echo '$hello' # $hello
+
+# in FOR operation, the delimiter is whitespace.
+# so if $DATA was:
+#   aaa
+#   bbb
+#   ccc
+for LINE in $DATA # LINE=aaa, LINE=bbb, LINE=ccc
+for LINE in "$DATA" # a whole variable
+
++ 
+#
+# An uninitialized variable has no value,
+#+ however it evaluates as 0 in an arithmetic operation.
+    if [ -z "$unassigned" ]
+    then
+    echo "\$unassigned is NULL."
+    fi
+    # $unassigned is NULL.
+
+    echo "$uninitialized" # (blank line)
+    let "uninitialized += 5" # Add 5 to it.
+    echo "$uninitialized" # 5

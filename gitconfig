@@ -11,4 +11,6 @@
         s = status
         d = diff
 [core]
-	excludesfile = /home/ouyangxy/.gitignore
+        excludesfile = /home/oyxy/.gitignore
+[credential]
+	helper = cache --timeout=3600
