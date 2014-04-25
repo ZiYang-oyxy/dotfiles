@@ -115,7 +115,7 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-export PATH=/usr/sbin:/sbin:~/bin:~/android-sdk_r20-linux/platform-tools:~/scripts:$PATH
+export PATH=/sbin:~/bin:~/android-sdk_r20-linux/platform-tools:~/scripts:$PATH
 export ANDROID_SDK_PLATFORM_TOOLS=~/android-sdk_r20-linux/platform-tools
 export HTTPSSH="ssh -CNvg -L 9999:10.8.8.1:9999 ie7@10.8.8.1"
 
@@ -201,6 +201,3 @@ function ethrestart()
 	sudo ifup eth0
    # sudo ifdown eth1 && sudo ifup eth1
 }
-
-
-#LANG=zh_CN.UTF-8

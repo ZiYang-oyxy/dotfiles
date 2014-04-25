@@ -113,6 +113,7 @@ all_defconfigs()
 docscope()
 {
 	(echo \-k; echo \-q; all_sources) > cscope.files
+	[ $1 = "-j" ] && find . -name "*.java" >> cscope.files
 	cscope -b -f cscope.out
 }
 
@@ -213,11 +214,9 @@ case "$1" in
 	"-c")
 		rm -f tags cscope.out.po cscope.out.in cscope.out cscope.files
 		;;
-    "-j")
-        find ${SRC_DIR}                         \
-                    -name "*.java"              \
-                    > cscope.files
-        ;;
+	"-j")
+		docscope -j
+		;;
 	*)
 		rm -f tags cscope.out.po cscope.out.in cscope.out cscope.files
 		docscope
