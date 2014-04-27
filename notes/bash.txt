@@ -1,6 +1,37 @@
 ABS READING NOTE
 ================
 
++ How to use double or single bracket, parentheses, curly braces
+http://stackoverflow.com/questions/2188199/how-to-use-double-or-single-bracket-parentheses-curly-braces
+
+Brackets
+	if [ CONDITION ]    Test construct  
+	if [[ CONDITION ]]  Extended test construct  
+	Array[1]=element1   Array initialization  
+	[a-z]               Range of characters within a Regular Expression  
+
+Curly Brackets
+	${variable}                             Parameter substitution  
+	${!variable}                            Indirect variable reference  
+	{ command1; command2; . . . commandN; } Block of code  
+	{string1,string2,string3,...}           Brace expansion  
+	{a..z}                                  Extended brace expansion
+	{}                                      Text replacement, after find and xargs
+
+Parentheses
+	( command1; command2 )             Command group executed within a subshell  
+	Array=(element1 element2 element3) Array initialization  
+	result=$(COMMAND)                  Command substitution, new style  
+	>(COMMAND)                         Process substitution  
+	<(COMMAND)                         Process substitution  
+
+Double Parentheses
+	(( var = 78 ))            Integer arithmetic   
+	var=$(( 20 + 5 ))         Integer arithmetic, with variable assignment   
+	(( var++ ))               C-style variable increment   
+	(( var-- ))               C-style variable decrement   
+	(( var0 = var1<98?9:21 )) C-style trinary operation
+
 + ,
 	1 let "t2 = ((a = 9, 15 / 3))" # Set "a = 9" and "t2 = 15 / 3"
 
@@ -67,6 +98,7 @@ array initialization.
     echo {file1,file2}\ :{\ A," B",' C'}
     #file1 : A file1 : B file1 : C file2 : A file2 : B file2 : C
 
+	#bash version 3+. 
     echo {a..z} # a b c d e f g h i j k l m n o p q r s t u v w x y z
 
 # Initializing an array, using extended brace expansion.
@@ -151,3 +183,146 @@ for LINE in "$DATA" # a whole variable
     echo "$uninitialized" # (blank line)
     let "uninitialized += 5" # Add 5 to it.
     echo "$uninitialized" # 5
+
++ IFS
+	# However ...
+	# $IFS treats whitespace differently than other characters.
+	output_args_one_per_line()
+	{
+	for arg
+	do
+	echo "[$arg]"
+	done # ^ ^ Embed within brackets, for your viewing pleasure.
+	}
+
+	echo; echo "IFS=\" \""
+	echo "-------"
+
+	IFS=" "
+	var=" a   b c   "
+
+	output_args_one_per_line $var
+	# [a]
+	# [b]
+	# [c]
+
+	echo; echo "IFS=:"
+	echo "-----"
+	IFS=:
+	var=":a::b:c:::"
+
+	output_args_one_per_line $var
+	# []
+	# [a]
+	# []
+	# [b]
+	# [c]
+	# []
+	# []
+
++ $* $@
+$*: All of the positional parameters, seen as a single word
+$@: Same as $*, but each parameter is a quoted string, that is, the parameters are passed on intact, without
+	interpretation or expansion. This means, among other things, that each parameter in the argument list
+	is seen as a separate word.
+
++ $!
+PID (process ID) of last job run in background
+	possibly_hanging_job & {
+	while ((count < TIMEOUT )); do
+		eval '[ ! -d "/proc/$lastjob" ] && ((count = TIMEOUT))'
+		lastjob=$!
+		((count++))
+		sleep 1
+	done
+	eval '[ -d "/proc/$lastjob" ] && kill -15 $lastjob'
+	}
+
++ declare(only in BASH)
+	# Certain arithmetic operations are permitted for declared integer variables without the need for expr or
+let.
+	declare -i n
+	n=6/3 
+	echo "n = $n"  # n = 2
+
+	# A declare -f line with no arguments in a script causes a listing of all the functions previously
+	defined in that script.
+
++ random in openwrt
+generate max 3 digit number: $(head -30 /dev/urandom | tr -dc "0123456789" | head -c3)
+
++ printf format
+http://www.codingunit.com/printf-format-specifiers-format-conversions-and-formatted-output
+
+FORMAT STRING
+The printf(“:%s:\n”, “Hello, world!”); statement prints the string (nothing special happens.)
+The printf(“:%15s:\n”, “Hello, world!”); statement prints the string, but print 15 characters. If the string is smaller the “empty” positions will be filled with “whitespace.”
+The printf(“:%.10s:\n”, “Hello, world!”); statement prints the string, but print only 10 characters of the string.
+The printf(“:%-10s:\n”, “Hello, world!”); statement prints the string, but prints at least 10 characters. If the string is smaller “whitespace” is added at the end. (See next example.)
+The printf(“:%-15s:\n”, “Hello, world!”); statement prints the string, but prints at least 15 characters. The string in this case is shorter than the defined 15 character, thus “whitespace” is added at the end (defined by the minus sign.)
+The printf(“:%.15s:\n”, “Hello, world!”); statement prints the string, but print only 15 characters of the string. In this case the string is shorter than 15, thus the whole string is printed.
+The printf(“:%15.10s:\n”, “Hello, world!”); statement prints the string, but print 15 characters.
+If the string is smaller the “empty” positions will be filled with “whitespace.” But it will only print a maximum of 10 characters, thus only part of new string (old string plus the whitespace positions) is printed.
+The printf(“:%-15.10s:\n”, “Hello, world!”); statement prints the string, but it does the exact same thing as the previous statement, accept the “whitespace” is added at the end.
+
+	main()
+	{
+		printf(":%s:\n", "Hello, world!");
+		printf(":%15s:\n", "Hello, world!");
+		printf(":%.10s:\n", "Hello, world!");
+		printf(":%-10s:\n", "Hello, world!");
+		printf(":%-15s:\n", "Hello, world!");
+		printf(":%.15s:\n", "Hello, world!");
+		printf(":%15.10s:\n", "Hello, world!");
+		printf(":%-15.10s:\n", "Hello, world!");
+	}
+
+	:Hello, world!:
+	:  Hello, world!:
+	:Hello, wor:
+	:Hello, world!:
+	:Hello, world!  :
+	:Hello, world!:
+	:     Hello, wor:
+	:Hello, wor     :
+
++ Manipulating Strings and Parameter Operation
+
++ set
+# The "--" prevents nasty surprises if $planet is null or
+#+ begins with a dash.
+	set -- $XXX
+
++ for loop
+#If the [list] in a for loop contains wild cards (* and ?) used in filename expansion, then globbing
+takes place.
+	for file in [jx]*
+	do
+	rm -f $file # Removes only files beginning with "j" or "x" in $PWD.
+	echo "Removed file \"$file\"".
+	done
+
+# Missing in [list] in a for loop
+# The 'in list' missing, therefore the loop operates on '$@'
+#+ (command-line argument list, including whitespace).
+	for arg
+	do
+		echo -n "$arg"
+	done
+
+# C-like syntax
+	for ((a=1, b=1; a <= LIMIT ; a++, b++))
+	do # The comma concatenates operations.
+		echo -n "$a-$b "
+	done
+
++ while loop
+# C-like syntax
+while (( a <= LIMIT ))
+do
+	echo -n "$a "
+	((a += 1))
+done
+
+#A while loop may have its stdin redirected to a file by a < at its end.
+#A while loop may have its stdin supplied by a pipe.
