@@ -79,6 +79,7 @@ In a double-parentheses construct, the ? can serve as an element of a C-style tr
 + $'...'
 The $' ... ' quoted string-expansion construct is a mechanism that uses escaped
 octal or hex values to assign ASCII characters to variables, e.g., quote=$'\042'.
+	echo $'\042' # echo -e "\042"
 
 + $$
 process ID variable. The $$ variable holds the process ID [19] of the script in which it appears.
@@ -169,6 +170,87 @@ test whether a certain command exists.
 #   ccc
 for LINE in $DATA # LINE=aaa, LINE=bbb, LINE=ccc
 for LINE in "$DATA" # a whole variable
+
++ (()) and let
+	(( 0 && 1 ))	# Logical AND
+	echo $?  # 1 ***
+	# And so ...
+	let "num = (( 0 && 1 ))"
+	echo $num # 0
+	# But ...
+	let "num = (( 0 && 1 ))"
+	echo $?  # 1 ***
+
+	(( 200 || 11 ))  # Logical OR
+	echo $?  # 0 ***
+	# ...
+	let "num = (( 200 || 11 ))"
+	echo $num # 1
+	let "num = (( 200 || 11 ))"
+	echo $?  # 0 ***
+
+
+	(( 200 | 11 ))  # Bitwise OR
+	echo $?    # 0
+	# ...
+	let "num = (( 200 | 11 ))"
+	echo $num  # 203
+	let "num = (( 200 | 11 ))"
+	echo $?    # 0 ***
+
+	# The "let" construct returns the same exit status
+	#+ as the double-parentheses arithmetic expansion.
+
+	# Again, note that the exit status of an arithmetic expression is not an error value.
+	var=-2 && (( var+=2 ))
+	echo $?  # 1
+
+	var=-2 && (( var+=2 )) && echo $var # Will not echo $var!
+
++ What is truth in "[...]"
+	echo "Testing \"0\""
+	if [ 0 ] # zero
+	then
+	echo "0 is true."
+	else
+	echo "0 is false."
+	fi # 0 is true.
+
+	echo "Testing \"1\""
+	if [ 1 ] # one
+	then
+	echo "1 is true."
+	else
+	echo "1 is false."
+	fi # 1 is true.
+
++ "[[...]]"
+Using the [[ ... ]] test construct, rather than [ ... ] can prevent many logic errors in scripts. For example, the &&, ||, <, and > operators work within a [[ ]] test, despite giving an error within a [ ] construct.
+	if [ $condition1 ] && [ $condition2 ]
+	# Same as: if [ $condition1 -a $condition2 ]
+	# Returns true if both condition1 and condition2 hold true...
+
+	if [[ $condition1 && $condition2 ]]
+	 # Also works.
+	# Note that && operator not permitted inside brackets
+	#+ of [ ... ] construct.
+
+
+
++ if COMMAND
+	# The "if COMMAND" construct returns the exit status of COMMAND.
+	dir=/home/bozo
+	if cd "$dir" 2>/dev/null; then # "2>/dev/null" hides error message.
+		echo "Now in $dir."
+	else
+		echo "Can't change to $dir."
+	fi
+
++ **
+	#exponentiation
+	let "z=5**3"
+	echo "z=$z" # z = 125
+				# "expr 5 ** 3" will return error
 
 + 
 #
