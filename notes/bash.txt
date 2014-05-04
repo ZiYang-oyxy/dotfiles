@@ -640,4 +640,63 @@ parentheses to another process. **Now it's a file stream, we can use file redire
 	done < <( echo "random input" )
 		 ^ ^		# the first means redirection, the second means process substitution
 
-TODO 24
++ Functions
+	fun () { echo "This is a function"; echo } # Error!
+											^ Need a semicolon
+
+It is even possible to nest a function within another function, although this is not very useful.
+	f1 ()
+	{
+		f2 () # nested
+		{
+			echo "Function \"f2\", inside \"f1\"."
+		}
+	}
+
+	f2	# Gives an error message.
+		# Even a preceding "declare -f f2" wouldn't help.
+	echo
+
+	f1	# Does nothing, since calling "f1" does not automatically call "f2".
+	f2	# Now, it's all right to call "f2",
+		#+ since its definition has been made visible by calling "f1".
+
+Passing an indirect reference to a function
+	echo_var ()
+	{
+		echo "$1"
+	}
+	message=Hello
+	Hello=Goodbye
+	echo_var "$message" # Hello
+	# Now, let's pass an indirect reference to the function.
+	echo_var "${!message}" # Goodbye
+
+Dereferencing a parameter passed to a function
+	DerefernceVariablePassedToFunction() {
+		if [ -n "$1" ] ; then
+			echo "value of [${1}] is: [${!1}]"
+		else
+			echo "Null parameter passed to this function"
+		fi
+	}
+
+	Variable="LinuxJournal"
+	DerefernceVariablePassedToFunction Variable
+	# $ /bin/bash DereferenceVarInFunction.sh
+	# value of [Variable] is: [LinuxJournal]
+
+Return
+The largest positive integer a function can return is *255*. The return command is closely
+tied to the concept of exit status, which accounts for this particular limitation. Fortunately,
+there are various workarounds for those situations requiring a large integer return value
+from a function
+A more elegant method is to have the function echo its "return value to stdout,"
+	max2 ()
+	{
+		echo $1
+	}
+	return_val=$(max2 33001 33997)
+
+
+
