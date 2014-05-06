@@ -696,7 +696,26 @@ A more elegant method is to have the function echo its "return value to stdout,"
 	{
 		echo $1
 	}
-	return_val=$(max2 33001 33997)
+	return_val=$(max2 33001)
 
+Local variable
+Before a function is called, all variables declared within the function are invisible outside the
+body of the function, not just those explicitly declared as local.
+	func ()
+	{
+		global_var=37
+	} # Visible only within the function block
+	#+ before the function has been called.
+
+	echo "global_var = $global_var"
+	# global_var =
+	# Function "func" has not yet been called,
+	#+ so $global_var is not visible here.
+
+	func
+
+	echo "global_var = $global_var"
+	# global_var = 37
+	# Has been set by function call.
 
 
