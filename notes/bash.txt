@@ -539,13 +539,38 @@ leave a soft link hanging pointing to the old name which is no longer there. The
 link is that it can refer to a different file system (since it is just a reference to a file name, not to
 actual data). And, unlike a hard link, a symbolic link can refer to a directory.
 
-TODO 16.2
++ grep
+The -v (or --invert-match) option filters out matches.
+	grep pattern1 *.txt | grep -v pattern2
+	# Matches all lines in "*.txt" files containing "pattern1",
+	# but ***not*** "pattern2".
 
+grep returns an exit status of 0, which makes it useful in a condition test
+in a script, especially in combination with the -q option to suppress output.
+	grep -q "$word" "$filename" # The "-q" option
+							    #+ causes nothing to echo to stdout.
 
++ $@ $*
+That is, "$*" is equivalent to "$1c$2c...", where c is the first  character of the value of the IFS variable
+That is, "$@" is equivalent to "$1" "$2" ...
+When there are no positional parameters, "$@" and $@ expand to nothing (i.e., they are removed). So "$@" can
+be use like this:
+	cat "$@" 	# The 'cat "$@"' construction gets input either from stdin or from files
+				# But 'cat "$*"' will return error if your input is null.
 
+	example:
+	$ cat rot13.sh
+	#!/bin/bash
+	cat "$@"
+	# Usage: ./rot13.sh filename
+	# or ./rot13.sh <filename
+	# or ./rot13.sh and supply keyboard input (stdin)
 
-
-
++ tr
+Dictionary encryption
+	x="wftedskaebjgdBstbdbsmnjgz"
+	echo $x | tr "a-z" 'oh, turtleneck Phrase Jar!'
+	# OUTPUT: Just another Perl hacker
 
 
 
@@ -718,4 +743,5 @@ body of the function, not just those explicitly declared as local.
 	# global_var = 37
 	# Has been set by function call.
 
-
++ Chapter 34. Gotchas
+ The chapter is really worth to read!
