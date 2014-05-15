@@ -121,9 +121,14 @@ export HTTPSSH="ssh -CNvg -L 9999:10.8.8.1:9999 ie7@10.8.8.1"
 
 function hanssh()
 {
-    sudo hans -c 106.186.28.188 -p wtmjsysww -n ie7 -m 1000
-    sleep 1
-    ssh -CNvg -D 127.0.0.1:9090 ie7@10.8.8.1
+	if [ "$1" = "-k" ]
+	then
+		sudo kill $(pidof hans)
+	else
+		sudo hans -c 106.186.28.188 -p wtmjsysww -n ie7 -m 1000
+		sleep 1
+		ssh -CNvg -D 127.0.0.1:9090 ie7@10.8.8.1
+	fi
 }
 
 function hanssh1()
@@ -196,8 +201,14 @@ function xgrepi()
 
 function ethrestart()
 {
-    sudo ifdown eth0
+#	sudo ifconfig eth0 down
+#	sudo ifconfig eth1 down
+#	sleep 1
+#	sudo ifconfig eth0 up
+#	sudo ifconfig eth1 up
+	sudo ifdown eth0
+	sudo ifdown eth1
 	sleep 1
 	sudo ifup eth0
-   # sudo ifdown eth1 && sudo ifup eth1
+	sudo ifup eth1
 }

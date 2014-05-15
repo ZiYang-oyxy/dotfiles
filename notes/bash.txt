@@ -1,6 +1,9 @@
 ABS READING NOTE
 ================
 
++ debug
+	#!/bin/sh -vx
+
 + default /bin/sh in ubuntu is dash, change to bash, you should run:
 	sudo dpkg-reconfigure dash
 

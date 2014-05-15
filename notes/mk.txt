@@ -1,0 +1,3 @@
++ If you use the = assignment, it means that every single occurrence of $(FILES) will be expanding the $(shell ...) syntax and thus invoking the shell command. This will make your make job run slower, or even have some surprising consequences.
+	FILES := $(shell ...)  # expand now; FILES is now the result of $(shell ...)
+	FILES = $(shell ...)   # expand later: FILES holds the syntax $(shell ...)
