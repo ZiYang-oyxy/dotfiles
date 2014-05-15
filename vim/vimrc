@@ -122,6 +122,11 @@ set t_Co=256
 colorscheme darkburn_ie7
 syntax on
 
+" Lua
+Bundle 'xolox/vim-misc'
+Bundle 'xolox/vim-lua-inspect'
+Bundle 'xolox/vim-lua-ftplugin'
+
 filetype plugin indent on     " required!
 
 "###########################
