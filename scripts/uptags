@@ -113,7 +113,7 @@ all_defconfigs()
 docscope()
 {
 	(echo \-k; echo \-q; all_sources) > cscope.files
-	[ $1 = "-j" ] && find . -name "*.java" >> cscope.files
+	[ "$1" = "-j" ] && find . -name "*.java" >> cscope.files
 	cscope -b -f cscope.out
 }
 

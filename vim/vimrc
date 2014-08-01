@@ -126,6 +126,8 @@ syntax on
 Bundle 'xolox/vim-misc'
 Bundle 'xolox/vim-lua-inspect'
 Bundle 'xolox/vim-lua-ftplugin'
+let g:lua_inspect_warnings = 0
+let g:loaded_luainspect = 1
 
 filetype plugin indent on     " required!
 
@@ -148,8 +150,10 @@ endif
 "c: Find functions calling this function
 "t: Find this text string
 "d: Find functions called by this function
+"	*gd* will be more helpful without cscope database
 "e: Find this egrep pattern
 "f: Find this file
+"	*gf* will be more helpful without cscope database
 "i: Find files #including this file
 map <C-@>s :cs find s <C-R>=expand("<cword>")<CR><CR>
 map <C-@>g :cs find g <C-R>=expand("<cword>")<CR><CR>
@@ -208,6 +212,7 @@ set smartcase
 
 " persistent undo
 set undofile
+set undodir=~/.vim/undodir
 
 "###########################
 "# Status line
