@@ -1,0 +1,13 @@
+#TOC {
+    width: 20%;
+    height: 100%;
+    font-size: 70%;
+    position: fixed;
+    left: 0;
+    overflow: auto;
+}
+
+#main {
+    float: right;
+    width:79.8%;
+}
