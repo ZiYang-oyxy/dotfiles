@@ -65,9 +65,9 @@ echo "pandoc \
 --self-contained" | tee /tmp/pdtmp && sh < /tmp/pdtmp
 
 	if [ "$?" -eq 0 ]; then
-		echo "output: create "$arg".html"
+		echo "output: create "${arg%.*}".html"
 	else
-		echo "output: convert "${arg%.*}" failed!"
+		echo "output: convert "$arg" failed!"
 	fi
 	echo
 done

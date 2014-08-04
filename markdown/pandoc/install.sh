@@ -1,18 +1,15 @@
 #!/bin/bash
 
-# for `dot` tool
-sudo apt-get install graphviz
-
-# install newest pandoc
-sudo apt-get install haskell-platform
-cabal update
-cabal install pandoc
-sudo cp ~/.cabal/bin/* /usr/bin/
-sudo cp ~/.cabal/share/* /usr/share -r
+## for `dot` tool
+#sudo apt-get install graphviz
+#
+## install newest pandoc
+#sudo apt-get install haskell-platform
+#cabal update
+#cabal install pandoc
 
 # install my data
 mkdir -p ~/bin ~/.pandoc
-cp pandoc_md.sh ~/bin/
-cp -r pandoc_css ~/.pandoc/
-cp -r ~/.cabal/share/pandoc*/data/* ~/.pandoc/
-cp -r templates ~/.pandoc/
+ln -s $PWD/pandoc_md.sh ~/bin/pandoc_md.sh
+ln -s $PWD/pandoc_css ~/.pandoc/pandoc_css
+ln -s $PWD/templates ~/.pandoc/templates
