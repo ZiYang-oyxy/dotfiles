@@ -77,12 +77,7 @@ h6 {
 p, blockquote, ul, ol, dl, li, table, pre {
    margin: 15px 0; }
 
-hr {
-   border: 0 none;
-   color: #cccccc;
-   height: 4px;
-   padding: 0;
-}
+hr{margin-top:20px;margin-bottom:20px;border:0;border-top:1px solid #eee}
 
 body > h2:first-child {
    margin-top: 0;
@@ -308,9 +303,10 @@ sup {
 * {
 	 -webkit-print-color-adjust: exact;
 }
-@media screen and (min-width: 914px) {
+
+@media screen and (min-width: 1064px) {
    body {
-      width: 854px;
+      width: 1004px;
       margin:0 auto;
    }
 }
