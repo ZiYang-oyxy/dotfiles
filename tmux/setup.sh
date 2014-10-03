@@ -5,16 +5,22 @@ P=`readlink -f $(dirname $0)`
 echo -n "Backup your original tmux files? (y/n)"
 read IN
 if [ "$IN" = "y" ] || [ "$IN" = "Y" ]; then
-    rm -f ~/.tmux.conf_backup; mv -f ~/.tmux.conf ~/.tmux.conf_backup
-    rm -f ~/.tmux-powerlinerc_backup; mv -f ~/.tmux-powerlinerc ~/.tmux-powerlinerc_backup
+    mv -f ~/.tmux.conf ~/.tmux.conf_backup
+    mv -f ~/.tmux-powerlinerc ~/.tmux-powerlinerc_backup
+    rm -rf ~/.tmux-pl-src_bak; mv -f ~/.tmux-pl-src ~/.tmux-pl-src_bak
 fi
 
 rm -f ~/.tmux.conf
 rm -f ~/.tmux-powerlinerc
+rm -rf ~/.tmux-pl-src
 
 ln -s $P/tmux.conf ~/.tmux.conf
-ln -s $P/tmux-powerline/tmux-powerlinerc ~/.tmux-powerlinerc
+ln -s $P/tmux-powerlinerc ~/.tmux-powerlinerc
+git clone https://github.com/erikw/tmux-powerline ~/.tmux-pl-src
+cp -r $P/custom/* ~/.tmux-pl-src/
+
 echo "=== DONE! ==="
 
 # patch fonts
-bash $P/tmux-powerline/fonts/setup.sh
+echo -n "Patch fonts for my tmux"
+bash $P/fonts/setup.sh

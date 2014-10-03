@@ -7,5 +7,5 @@ tags
 todo.txt
 .netrwhist
 repoo
-vim/bundle/*/doc
-vim/undodir
+vim/vim-base/bundle
+vim/vim-base/undodir

@@ -26,5 +26,9 @@ bash $PWD/vim/setup.sh
 # tmux & powerline
 bash $PWD/tmux/setup.sh
 
+# git
 rm -f ~/.gitconfig
 ln -s $PWD/gitconfig ~/.gitconfig
+
+# pandoc
+bash $PWD/markdown/pandoc/install.sh

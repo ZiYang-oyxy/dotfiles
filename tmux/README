@@ -15,3 +15,13 @@ REQUIREMENT:
 
 INSTALL:
 ./setup.sh (There is something to do by yourself, please read "TODO" in setup.sh)
+
+FAQ:
+1. .bashrc/.profile is not loaded on new tmux session (or window), why?
+    At the end of your .bash_profile, put the line:
+
+    ```sh
+    . ~/.bashrc
+    ```
+
+    > refer to http://stackoverflow.com/questions/9652126/bashrc-profile-is-not-loaded-on-new-tmux-session-or-window-why

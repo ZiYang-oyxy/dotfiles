@@ -1,5 +1,7 @@
 #!/bin/bash
 
+P=`readlink -f $(dirname $0)`
+
 ## for `dot` tool
 #sudo apt-get install graphviz
 #
@@ -10,6 +12,6 @@
 
 # install my data
 mkdir -p ~/bin ~/.pandoc
-ln -s $PWD/pandoc_md.sh ~/bin/pandoc_md.sh
-ln -s $PWD/pandoc_css ~/.pandoc/pandoc_css
-ln -s $PWD/templates ~/.pandoc/templates
+ln -s $P/pandoc_md.sh ~/bin/pandoc_md.sh
+ln -s $P/pandoc_css ~/.pandoc/pandoc_css
+ln -s $P/templates ~/.pandoc/templates
