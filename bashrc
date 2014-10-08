@@ -94,6 +94,7 @@ fi
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+alias vi='vim'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -118,6 +119,8 @@ fi
 export PATH=/sbin:~/bin:~/android-sdk_r20-linux/platform-tools:~/scripts:$PATH
 export ANDROID_SDK_PLATFORM_TOOLS=~/android-sdk_r20-linux/platform-tools
 export HTTPSSH="ssh -CNvg -L 9999:10.8.8.1:9999 ie7@10.8.8.1"
+
+. ~/.bashrc_notrack
 
 function hanssh()
 {
@@ -163,6 +166,11 @@ function cgrep()
     find . -name .repo -prune -o -name .git -prune -o -type f \( -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.h' \) -print0 | xargs -0 grep --color -n "$@"
 }
 
+function lgrep()
+{
+    find . -name .repo -prune -o -name .git -prune -o -type f \( -name '*.lua' \) -print0 | xargs -0 grep --color -n "$@"
+}
+
 function cgrepi()
 {
     find . -name .repo -prune -o -name .git -prune -o -type f \( -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.h' \) -print0 | xargs -0 grep -i --color -n "$@"
@@ -197,18 +205,4 @@ function xgrep()
 function xgrepi()
 {
     find . -name .repo -prune -o -name .git -prune -o  -type f -name "*" -print0 | xargs -0 grep -i --color -n "$@"
-}
-
-function ethrestart()
-{
-#	sudo ifconfig eth0 down
-#	sudo ifconfig eth1 down
-#	sleep 1
-#	sudo ifconfig eth0 up
-#	sudo ifconfig eth1 up
-	sudo ifdown eth0
-	sudo ifdown eth1
-	sleep 1
-	sudo ifup eth0
-	sudo ifup eth1
 }

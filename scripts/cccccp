@@ -58,6 +58,23 @@ case $TARGET in
         FLASH_SIZE=4M
         SERIES="ap143"
         ;;
+    sr)
+        sudo cp ~/qsdk_cs/qsdk/bin/ar71xx/openwrt-ar71xx-generic-ap151-16M-* /tftpboot/
+
+cat <<EOF
+set serverip 192.168.1.100;tftp 80060000 openwrt-ar71xx-generic-ap151-16M-squashfs-sysupgrade.bin;erase 9f050000 +fa0000;cp.b 80060000 9f050000 fa0000;
+EOF
+#set serverip 192.168.1.100;tftp 80060000 openwrt-ar71xx-generic-ap151-16M-kernel.bin;erase 9fe80000 +170000;cp.b 80060000 9fe80000 170000;tftp 80060000 openwrt-ar71xx-generic-ap151-16M-rootfs-squashfs.bin;erase 9f050000 +e30000;cp.b 80060000 9f050000 e30000;boot
+        exit 1
+        ;;
+    sr_r)
+		wget http://mobileci.rd.tp-link.net/jenkins/view/SmartRouter/job/SmartRouter/lastSuccessfulBuild/artifact/qsdk/bin/ar71xx/openwrt-ar71xx-generic-ap151-16M-squashfs-sysupgrade.bin
+        sudo mv openwrt-ar71xx-generic-ap151-16M-squashfs-sysupgrade.bin /tftpboot/
+		cat <<EOF
+set serverip 192.168.1.100;tftp 80060000 openwrt-ar71xx-generic-ap151-16M-squashfs-sysupgrade.bin;erase 9f050000 +fa0000;cp.b 80060000 9f050000 fa0000;
+EOF
+		exit 1
+		;;
     *)
         echo "unknow target:$TARGET"
         exit 1

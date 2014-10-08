@@ -20,6 +20,12 @@ case $TARGET in
     TPmini2_Router)
         wget http://git.tp-link.net/jenkins/view/Linux/job/TPmini2_Router/lastSuccessfulBuild/artifact/proprietary.tar.gz
         ;;
+    sr)
+        rm -f proprietary.tar.bz2
+        wget http://mobileci.rd.tp-link.net/jenkins/view/SmartRouter/job/SmartRouter/lastSuccessfulBuild/artifact/qsdk/proprietary.tar.bz2
+        tar -xvf proprietary.tar.bz2
+        exit 1
+        ;;
     *)
         echo "unknow target:$TARGET"
         exit 1

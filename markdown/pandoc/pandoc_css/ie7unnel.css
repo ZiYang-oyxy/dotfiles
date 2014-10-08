@@ -22,6 +22,21 @@ a.anchor {
    top: 0;
    left: 0;
    bottom: 0; }
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a:active {
+    text-decoration: underline;
+}
 
 h1, h2, h3, h4, h5, h6 {
    margin: 20px 0 10px;

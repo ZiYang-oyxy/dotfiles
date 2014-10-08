@@ -95,6 +95,8 @@ all_sources()
 	find_other_sources '*.[chS]'
 
 	find_other_sources '*.cpp'
+
+	find_other_sources '*.lua'
 }
 
 all_kconfigs()
@@ -216,6 +218,9 @@ case "$1" in
 		;;
 	"-j")
 		docscope -j
+		;;
+	"lua")
+		xtags ctags
 		;;
 	*)
 		rm -f tags cscope.out.po cscope.out.in cscope.out cscope.files

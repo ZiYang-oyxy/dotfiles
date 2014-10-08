@@ -12,6 +12,7 @@ Usage: pandoc_md.sh [options] [markdown_files]...
       -s SIDEBAR_CSS            sidebar css file path
       -r                        output html with regular toc
       -n                        output html without toc
+      -p                        pure html without any css
 
   By default, pandoc_md.sh converts pandoc's markdown files to
   html files embedded a sidebar.
@@ -24,13 +25,14 @@ SIDEBAR_CSS=~/.pandoc/pandoc_css/sidebar.css
 T=t.html
 TOC=--toc
 
-while getopts ":c:s:rn" OPTION
+while getopts ":c:s:rnp" OPTION
 do
 	case $OPTION in
 	c ) CORE_CSS="$OPTARG";;
 	s ) SIDEBAR_CSS="$OPTARG";;
-	r ) SIDEBAR_CSS="" && T="default";;
-	n ) TOC="" && SIDEBAR_CSS="" && T="default";;
+	r ) SIDEBAR_CSS="";;
+	n ) TOC="" && SIDEBAR_CSS="";;
+	p ) CORE_CSS="" && SIDEBAR_CSS="";;
 	* ) usage
 	esac
 done
