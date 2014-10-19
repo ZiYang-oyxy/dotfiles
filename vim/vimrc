@@ -81,6 +81,7 @@ map <silent> <leader>sr :SyntasticReset<CR>
 
 " Snippet
 Bundle 'msanders/snipmate.vim.git'
+Bundle 'honza/vim-snippets'
 let g:snips_author = 'Ouyang Xiongyi <ouyangxiongyi@tp-link.net>'
 
 " Git
@@ -185,7 +186,7 @@ set textwidth=0
 set nu
 
 " Use space to replace tab, can usb <C-V><Tab> to insert a real tab
-set expandtab
+"set expandtab
 
 set lcs=tab:>-,trail:-
 set list
