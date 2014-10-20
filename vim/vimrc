@@ -113,6 +113,7 @@ Bundle 'tpope/vim-surround'
 Bundle 'vim-scripts/DrawIt'
 Bundle 'vim-scripts/matrix.vim--Yang'
 Bundle 'vim-scripts/IndexedSearch'
+Bundle 'katonori/binedit'
 
 Bundle 'altercation/vim-colors-solarized.git'
 "terminal background color: #333333
@@ -122,6 +123,7 @@ set t_Co=256
 "colorscheme solarized
 colorscheme darkburn_ie7
 syntax on
+
 
 " Lua
 Bundle 'xolox/vim-misc'

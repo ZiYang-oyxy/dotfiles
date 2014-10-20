@@ -6,6 +6,8 @@
 #
 # Uses the following environment variables:
 # ARCH, SUBARCH, SRCARCH, srctree, src, obj
+#
+# example: export SRCARCH=mips; uptags
 
 if [ "$KBUILD_VERBOSE" = "1" ]; then
 	set -x
