@@ -1,9 +1,0 @@
-*.py[cod]
-*.sw?
-*~
-.DS_Store
-.ropeproject
-tags
-todo.txt
-.netrwhist
-repoo

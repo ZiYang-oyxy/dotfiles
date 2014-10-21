@@ -1,7 +1,0 @@
-#!/bin/bash
-
-sudo rm /etc/network/interfaces
-sudo cp /etc/network/interfaces_000 /etc/network/interfaces
-sudo ifdown eth0
-sudo ifup eth0
-dns

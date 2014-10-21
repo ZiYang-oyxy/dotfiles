@@ -10,14 +10,14 @@ rm -f ~/.bashrc
 ln -s $PWD/bashrc ~/.bashrc
 echo "=== DONE! ==="
 
-# scripts
-echo -n "Backup your original ~/scripts? (y/n)"
+# tools
+echo -n "Backup your original ~/tools? (y/n)"
 read IN
 if [ "$IN" = "y" ] || [ "$IN" = "Y" ]; then
-    rm -rf ~/scripts_backup; mv -f ~/scripts ~/scripts_backup
+    rm -rf ~/tools_backup; mv -f ~/tools ~/tools_backup
 fi
-rm -rf ~/scripts
-ln -s $PWD/scripts ~/scripts
+rm -rf ~/tools
+ln -s $PWD/tools ~/tools
 echo "=== DONE! ==="
 
 # vim

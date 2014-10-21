@@ -59,10 +59,10 @@ color_prompt=yes
 
 if [ "$color_prompt" = yes ]; then
     #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-    PS1='   ♫  ${debian_chroot:+($debian_chroot)}\[\033[01;35m\]\w\[\033[00m\] \$ '
+    PS1='╔║${debian_chroot:+($debian_chroot)}\[\033[30;44m\]\w/\[\033[00m\]║═╗\n╚═>> '
 else
     #PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-    PS1='   ♫  ${debian_chroot:+($debian_chroot)}\w \$ '
+    PS1='   ♫  ${debian_chroot:+($debian_chroot)}\w\n\$ '
 fi
 unset color_prompt force_color_prompt
 
@@ -94,7 +94,6 @@ fi
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
-alias vi='vim'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -116,93 +115,9 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-export PATH=/sbin:~/bin:~/android-sdk_r20-linux/platform-tools:~/scripts:$PATH
+export PATH=/sbin:~/bin:~/android-sdk_r20-linux/platform-tools:~/scripts:~/tools:$PATH
 export ANDROID_SDK_PLATFORM_TOOLS=~/android-sdk_r20-linux/platform-tools
 export HTTPSSH="ssh -CNvg -L 9999:10.8.8.1:9999 ie7@10.8.8.1"
 
 . ~/.bashrc_notrack
-
-function hanssh()
-{
-	if [ "$1" = "-k" ]
-	then
-		sudo kill $(pidof hans)
-	else
-		sudo hans -c 106.186.28.188 -p wtmjsysww -n ie7 -m 1000
-		sleep 1
-		ssh -CNvg -D 127.0.0.1:9090 ie7@10.8.8.1
-	fi
-}
-
-function hanssh1()
-{
-    ssh -CNvg -D 127.0.0.1:9090 ie7@106.186.28.188
-}
-
-
-### advanced grep ###
-function xfind()
-{
-    find . -name .repo -prune -o -name .git -prune -o -name "*$@*" -print
-}
-
-function xfindi()
-{
-    find . -name .repo -prune -o -name .git -prune -o  -type f -iname "*$@*" -print
-}
-
-function jgrep()
-{
-    find . -name .repo -prune -o -name .git -prune -o  -type f -name "*\.java" -print0 | xargs -0 grep --color -n "$@"
-}
-
-function jgrepi()
-{
-    find . -name .repo -prune -o -name .git -prune -o  -type f -name "*\.java" -print0 | xargs -0 grep -i --color -n "$@"
-}
-
-function cgrep()
-{
-    find . -name .repo -prune -o -name .git -prune -o -type f \( -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.h' \) -print0 | xargs -0 grep --color -n "$@"
-}
-
-function lgrep()
-{
-    find . -name .repo -prune -o -name .git -prune -o -type f \( -name '*.lua' \) -print0 | xargs -0 grep --color -n "$@"
-}
-
-function cgrepi()
-{
-    find . -name .repo -prune -o -name .git -prune -o -type f \( -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.h' \) -print0 | xargs -0 grep -i --color -n "$@"
-}
-
-function resgrep()
-{
-    for dir in `find . -name .repo -prune -o -name .git -prune -o -name res -type d`; do find $dir -type f -name '*\.xml' -print0 | xargs -0 grep --color -n "$@"; done;
-}
-
-function resgrepi()
-{
-    for dir in `find . -name .repo -prune -o -name .git -prune -o -name res -type d`; do find $dir -type f -name '*\.xml' -print0 | xargs -0 grep -i --color -n "$@"; done;
-}
-
-# Makefile
-function mgrep()
-{
-    find . -name .repo -prune -o -name .git -prune -o  -type f \( -name "Makefile" -o -name '*.mk' \) -print0 | xargs -0 grep --color -n "$@"
-}
-
-function mgrepi()
-{
-    find . -name .repo -prune -o -name .git -prune -o  -type f \( -name "Makefile" -o -name '*.mk' \) -print0 | xargs -0 grep -i --color -n "$@"
-}
-
-function xgrep()
-{
-    find . -name .repo -prune -o -name .git -prune -o  -type f -name "*" -print0 | xargs -0 grep --color -n "$@"
-}
-
-function xgrepi()
-{
-    find . -name .repo -prune -o -name .git -prune -o  -type f -name "*" -print0 | xargs -0 grep -i --color -n "$@"
-}
+. ~/tools/common.sh

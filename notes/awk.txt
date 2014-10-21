@@ -1,0 +1,17 @@
+NOTE: When using the ‘~’ and ‘!~’ operators, there is a difference between a regexp constant enclosed in slashes and a string constant enclosed in double quotes. If you are going to use a string constant, you have to understand that the string is, in essence, scanned twice: the first time when awk reads your program, and the second time when it goes to match the string on the lefthand side of the operator with the pattern on the right. This is true of any string-valued expression (such as digits_regexp, shown previously), not just string constants.
+
+What difference does it make if the string is scanned twice? The answer has to do with escape sequences, and particularly with backslashes. To get a backslash into a regular expression inside a string, you have to type two backslashes.
+
+For example, /\*/ is a regexp constant for a literal ‘*’. Only one backslash is needed. To do the same thing with a string, you have to type "\\*". The first backslash escapes the second one so that the string actually contains the two characters ‘\’ and ‘*’.
+
+
+{n,m}
+Interval expressions were not traditionally available in awk. As part of the POSIX standard they were added, to make awk and egrep consistent with each other. However, since old programs may use `{' and `}' in regexp constants, by default gawk does not match interval expressions in regexps. If either `--posix' or `--re-interval' are specified (see section Command Line Options), then interval expressions are allowed in regexps.
+
+=== external-function-awk ===
+http://www.unix.com/shell-programming-and-scripting/49026-external-function-awk.html
+
+ $ function ABC() { echo AA; return; }
+ $ export -f ABC
+ $ awk '{system("bash -c \"ABC\")}' -
+ $ awk '{"bash -c \"ABC\"" | getline b; print b}' -
