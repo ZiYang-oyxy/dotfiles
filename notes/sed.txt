@@ -1,0 +1,46 @@
+=== Group command ===
+Braces ({}) are used in sed to nest one address inside another or to apply multiple commands at the same address. You can nest addresses if you want to specify a range of lines and then, within that range, specify another address. For example, to delete blank lines only inside blocks of tbl input, use the following command:
+
+/^\.TS/,/^\.TE/{
+	/^$/d
+  	s/^\.ps 10/.ps 8/
+  	s/^\.vs 12/.vs 10/
+}
+
+=== metacharacters in replacement ===
+The replacement is a string of characters that will replace what is matched by the regular expression. (See Section 3.2.12.1 in Chapter 3.) In the replacement section, only the following characters have special meaning:
+
+&
+Replaced by the string matched by the regular expression.
+	s/UNIX/\\s-2&\\s0/g
+		on the UNIX Operating System.
+
+	then the substitute command produces:
+		on the \s-2UNIX\s0 Operating System.
+
+\n (capture)
+Matches the nth substring (n is a single digit) previously specified in the pattern using "\(" and "\)".
+
+	$ cat test1
+	first:second
+	one:two
+	$ sed  's/\(.*\):\(.*\)/\2:\1/' test1
+	second:first
+	two:one
+
+\
+Used to escape the ampersand (&), the backslash (\), and the substitution command's delimiter when they are used literally in the replacement section. In addition, it can be used to escape the newline and create a multiline replacement string.
+
+=== Print Line Number ===
+#n print line number and line with if statement
+/       if/{
+=
+p
+}
+
+=== ===
+The substitute command matches the same pattern as the address and removes it:
+/Northeast$/{
+	s///
+	w region.northeast
+	}

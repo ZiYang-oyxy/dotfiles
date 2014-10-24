@@ -16,7 +16,7 @@ function hanssh()
 
 function hanssh1()
 {
-    ssh -CNvg -D 127.0.0.1:9090 ie7@106.186.28.188
+	ssh -CNvg -D 127.0.0.1:9090 ie7@106.186.28.188
 }
 
 ### find
@@ -124,22 +124,22 @@ function _xgrepi() {
 
 function _jgrep()
 {
-    $FIND $IGNORE_FILE -o  -type f -name "*.java" -print0 | xargs -0 grep --color=always -n "$@"
+	$FIND $IGNORE_FILE -o  -type f -name "*.java" -print0 | xargs -0 grep --color=always -n "$@"
 }
 
 function _jgrepi()
 {
-    $FIND $IGNORE_FILE -o  -type f -name "*.java" -print0 | xargs -0 grep -i --color=always -n "$@"
+	$FIND $IGNORE_FILE -o  -type f -name "*.java" -print0 | xargs -0 grep -i --color=always -n "$@"
 }
 
 function _lgrep()
 {
-    $FIND $IGNORE_FILE -o -type f -name "*.lua" -print0 | xargs -0 grep --color=always -n "$@"
+	$FIND $IGNORE_FILE -o -type f -name "*.lua" -print0 | xargs -0 grep --color=always -n "$@"
 }
 
 function _lgrepi()
 {
-    $FIND $IGNORE_FILE -o -type f -name "*.lua" -print0 | xargs -0 grep -i --color=always -n "$@"
+	$FIND $IGNORE_FILE -o -type f -name "*.lua" -print0 | xargs -0 grep -i --color=always -n "$@"
 }
 
 function _cgrep()
@@ -149,27 +149,27 @@ function _cgrep()
 
 function _cgrepi()
 {
-    $FIND $IGNORE_FILE -o -type f -iregex "$C_FILE_PAT" -print0 | xargs -0 grep -i --color=always -n "$@"
+	$FIND $IGNORE_FILE -o -type f -iregex "$C_FILE_PAT" -print0 | xargs -0 grep -i --color=always -n "$@"
 }
 
 function _sgrep()
 {
-    $FIND $IGNORE_FILE -o -type f ! -iregex "$SHELL_FILE_PAT_REV" -print0 | xargs -0 grep --color=always -n "$@"
+	$FIND $IGNORE_FILE -o -type f ! -iregex "$SHELL_FILE_PAT_REV" -print0 | xargs -0 grep --color=always -n "$@"
 }
 
 function _sgrepi()
 {
-    $FIND $IGNORE_FILE -o -type f ! -iregex "$SHELL_FILE_PAT_REV" -print0 | xargs -0 grep -i --color=always -n "$@"
+	$FIND $IGNORE_FILE -o -type f ! -iregex "$SHELL_FILE_PAT_REV" -print0 | xargs -0 grep -i --color=always -n "$@"
 }
 
 function _resgrep()
 {
-    for dir in `$FIND $IGNORE_FILE -o -name res -type d`; do $FIND $dir -type f -name '*\.xml' -print0 | xargs -0 grep --color=always -n "$@"; done;
+	for dir in `$FIND $IGNORE_FILE -o -name res -type d`; do $FIND $dir -type f -name '*\.xml' -print0 | xargs -0 grep --color=always -n "$@"; done;
 }
 
 function _resgrepi()
 {
-    for dir in `$FIND $IGNORE_FILE -o -name res -type d`; do $FIND $dir -type f -name '*\.xml' -print0 | xargs -0 grep -i --color=always -n "$@"; done;
+	for dir in `$FIND $IGNORE_FILE -o -name res -type d`; do $FIND $dir -type f -name '*\.xml' -print0 | xargs -0 grep -i --color=always -n "$@"; done;
 }
 
 function _mgrep()
@@ -179,7 +179,7 @@ function _mgrep()
 
 function _mgrepi()
 {
-    $FIND $IGNORE_FILE -o  -type f -iregex "$MAKE_FILE_PAT" -print0 | xargs -0 grep -i --color=always -n "$@"
+	$FIND $IGNORE_FILE -o  -type f -iregex "$MAKE_FILE_PAT" -print0 | xargs -0 grep -i --color=always -n "$@"
 }
 
 grep_fact c j l m res s x

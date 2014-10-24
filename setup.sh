@@ -1,13 +1,13 @@
 #!/bin/bash
 
-# bashrc
-echo -n "Backup your original bashrc? (y/n)"
+# my bash custom
+echo -n "Backup your original bash_aliases? (y/n)"
 read IN
 if [ "$IN" = "y" ] || [ "$IN" = "Y" ]; then
-    rm -f ~/.bashrc_backup; mv -f ~/.bashrc ~/.bashrc_backup
+	mv -f ~/.bash_aliases ~/.bash_aliases_backup
 fi
-rm -f ~/.bashrc
-ln -s $PWD/bashrc ~/.bashrc
+rm -f ~/.bash_aliases
+ln -s $PWD/bash_aliases ~/.bash_aliases
 echo "=== DONE! ==="
 
 # tools

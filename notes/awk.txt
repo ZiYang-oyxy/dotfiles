@@ -8,6 +8,98 @@ For example, /\*/ is a regexp constant for a literal ‘*’. Only one backslash
 {n,m}
 Interval expressions were not traditionally available in awk. As part of the POSIX standard they were added, to make awk and egrep consistent with each other. However, since old programs may use `{' and `}' in regexp constants, by default gawk does not match interval expressions in regexps. If either `--posix' or `--re-interval' are specified (see section Command Line Options), then interval expressions are allowed in regexps.
 
+=== variable ===
+Each variable has a string value and a numeric value, and awk uses the appropriate value based on the context of the expression. (Strings that do not consist of numbers have a numeric value of 0.) Variables do not have to be initialized; awk automatically initializes them to the empty string, which acts like 0 if used as a number.
+
+A space is the string concatenation operator. The expression:
+ z = "Hello" "World"
+ or
+ { print $1 "aa" $2 }
+concatenates the two strings and assigns "HelloWorld" to the variable z
+
+=== system variable ===
++ NF
+You can also use NF to reference the last field of each record. Using the "$" field operator and NF produces that reference. If there are six fields, then "$NF" is the same as "$6." 
+
+=== Passing Parameters Into a Script ===
+An important restriction on command-line parameters is that they are **not available in the BEGIN procedure.** That is, they are not available until after the first line of input is read.
+
+ awk  'BEGIN { print n }
+ {
+ if (n == 1) print "Reading the first file"
+ if (n == 2) print "Reading the second file"
+ }' n=1 test n=2 test2
+
+ output:
+ _ # none
+ Reading the first file
+ Reading the second file
+
+ awk '{ print n }' n=1 test n=2
+ output:
+ 1
+
+ awk -v n=1 '{ print n }' test
+
+=== associative arrays ===
+It is important to remember that all array indices in awk are strings.
+The order in which the items are retrieved is somewhat random.
+
+awk 'BEGIN { data[1.23] = "3.21"; CONVFMT = "%d"; printf "<%s>\n", data[1.23] }'
+output: <>
+Here, nothing was printed between the angle brackets, since the second time, 1.23 was converted to just 1, and data["1"] has the empty string as its value.
+
+=== Testing for Membership in an Array ===
+The keyword *in* is also an operator that can be used in a conditional expression to test that a subscript is a member of an array. 
+if ( "BASIC" in acro )
+	print "Found BASIC"
+
+Here's the lookup program:
+  awk '# lookup -- reads local glossary file and prompts user for query
+  
+  #0
+  BEGIN { FS = "\t"; OFS = "\t"
+  	# prompt user
+  	printf("Enter a glossary term: ")
+  } 
+  
+  #1 read local file named glossary
+  FILENAME == "glossary" {
+  	# load each glossary entry into an array
+  	entry[$1] = $2
+  	next
+  } 
+  
+  #2 scan for command to exit program
+  $0 ~ /^(quit|[qQ]|exit|[Xx])$/ { exit }
+  
+  #3 process any non-empty line 
+  $0 != "" {
+  	if ( $0 in entry ) {
+  		# it is there, print definition
+  		print entry[$0]
+  	} else
+  		print $0 " not found"
+  }
+  
+  #4 prompt user again for another term
+  {
+  	printf("Enter another glossary term (q to quit): ")
+  }' glossary -
+
+=== Invoking awk Using the #! Syntax ===
+#!/bin/awk -f
+You can put only one parameter on the "#!" line. This line is processed directly by the UNIX kernel; it is not processed by the shell and thus cannot contain arbitrary shell constructs.
+
+=== the getline functions ===
+NOTE: Although getline is called a function and it does return a value, its syntax resembles a statement. Do not write getline(); its syntax does not permit parentheses.
+
+`command | getline`
+NOTE: The values of NR and FNR are not changed
+
+`getline < file`
+NOTE: This form of the getline command sets NF, NR, FNR, and the value of $0
+
 === external-function-awk ===
 http://www.unix.com/shell-programming-and-scripting/49026-external-function-awk.html
 
