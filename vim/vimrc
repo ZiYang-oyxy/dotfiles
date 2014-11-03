@@ -107,13 +107,13 @@ let g:EasyMotion_mapping_k = ''
 let g:EasyMotion_mapping_n = ''
 let g:EasyMotion_mapping_N = ''
 "Bundle 'goldfeld/vim-seek'
-"Bundle 'joeytwiddle/sexy_scroller.vim'
 Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-surround'
 Bundle 'vim-scripts/DrawIt'
 Bundle 'vim-scripts/matrix.vim--Yang'
 Bundle 'vim-scripts/IndexedSearch'
 Bundle 'katonori/binedit'
+"Bundle 'yonchu/accelerated-smooth-scroll'
 
 Bundle 'altercation/vim-colors-solarized.git'
 "terminal background color: #333333
@@ -131,6 +131,20 @@ Bundle 'xolox/vim-lua-inspect'
 Bundle 'xolox/vim-lua-ftplugin'
 let g:lua_inspect_warnings = 0
 let g:loaded_luainspect = 1
+
+" json
+Bundle 'elzr/vim-json'
+au! BufRead,BufNewFile *.json set filetype=json
+augroup json_autocmd
+  autocmd!
+  autocmd FileType json set autoindent
+  autocmd FileType json set formatoptions=tcq2l
+  autocmd FileType json set textwidth=78 shiftwidth=2
+  autocmd FileType json set softtabstop=2 tabstop=8
+  autocmd FileType json set expandtab
+  autocmd FileType json set foldmethod=syntax
+augroup END
+let g:vim_json_syntax_conceal = 0
 
 filetype plugin indent on     " required!
 
@@ -186,9 +200,6 @@ autocmd BufEnter * let &titlestring = ' ' . expand("%:t")
 set title
 set textwidth=0
 set nu
-
-" Use space to replace tab, can usb <C-V><Tab> to insert a real tab
-"set expandtab
 
 set lcs=tab:>-,trail:-
 set list
