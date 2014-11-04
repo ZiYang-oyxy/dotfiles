@@ -74,7 +74,12 @@ grep_ed() {
 	# EXAMPLE:
 	# "./b:7:xgrep a" := [35m[K./b[m[K[36m[K:[m[K[32m[K7[m[K[36m[K:[m[Kxgrep [01;31m[Ka[m[K
 
-	awk --re-interval -v cmd="$*" -v me="$ME" '
+	CMD="$1"
+	shift
+
+	CMD=$CMD" \\\\\"$*\\\\\""
+
+	awk --re-interval -v cmd="$CMD" -v me="$ME" '
 	BEGIN {
 		system("clear")
 		cmd2 = sprintf("bash -c \"source %s; %s\"", me, cmd)
@@ -183,3 +188,5 @@ function _mgrepi()
 }
 
 grep_fact c j l m res s x
+
+alias lgrep="grep_ed _lgrep"
