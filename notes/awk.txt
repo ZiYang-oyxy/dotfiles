@@ -107,3 +107,16 @@ http://www.unix.com/shell-programming-and-scripting/49026-external-function-awk.
  $ export -f ABC
  $ awk '{system("bash -c \"ABC\")}' -
  $ awk '{"bash -c \"ABC\"" | getline b; print b}' -
+
+=== comments ===
+CAUTION: As mentioned in One-shot, you can enclose small to medium programs in single quotes, in order to keep your shell scripts self-contained. When doing so, don’t put an apostrophe (i.e., a single quote) into a comment (or anywhere else in your program). The shell interprets the quote as the closing quote for the entire program. As a result, usually the shell prints a message about mismatched quotes, and if awk actually runs, it will probably print strange messages about syntax errors. For example, look at the following:
+
+$ awk '{ print "hello" } # let's be cute'
+>
+The shell sees that the first two quotes match, and that a new quoted object begins at the end of the command line. It therefore prompts with the secondary prompt, waiting for more input. With Unix awk, closing the quoted string produces this result:
+
+$ awk '{ print "hello" } # let's be cute'
+> '
+error→ awk: can't open file be
+error→  source line number 1
+Putting a backslash before the single quote in ‘let's’ wouldn’t help, since backslashes are not special inside single quotes. The next subsection describes the shell’s quoting rules.
