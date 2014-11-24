@@ -1,6 +1,6 @@
 [user]
 	name = Ouyang Xiongyi
-    email = oywymail@163.com
+    email = hh123okbb@gmail.com
 [color]
         ui = always
 [diff]
@@ -14,3 +14,5 @@
         excludesfile = ~/.gitignore
 [credential]
 	helper = cache --timeout=3600
+[push]
+	default = matching
