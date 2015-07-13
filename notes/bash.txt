@@ -748,3 +748,15 @@ body of the function, not just those explicitly declared as local.
 
 + Chapter 34. Gotchas
  The chapter is really worth to read!
+
+-----------
+>/dev/null2>&1与2>&1>/dev/null的区别
+Command >/dev/null 2>&1 相当于
+stdout="/dev/null"
+stderr="$stdout"   ## 这时，stderr也等于"/dev/null"了
+ 
+结果是标准输出和标准错误都指向了/dev/null， 也就是所有的输出都被我们丢弃
+ 
+Command 2>&1 >/dev/null 相当于
+stderr="$stdout" ##  stderr指向了屏幕，因为stdout这时还是指向屏幕！
+stdout="/dev/null" ##   stdout指向了/dev/null，但不会影响到 stderr的指向

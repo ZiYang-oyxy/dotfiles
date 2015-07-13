@@ -116,11 +116,13 @@ Bundle 'katonori/binedit'
 "Bundle 'yonchu/accelerated-smooth-scroll'
 
 Bundle 'altercation/vim-colors-solarized.git'
+Bundle 'endel/vim-github-colorscheme'
 "terminal background color: #333333
 "set background=dark
 "set background=light
 set t_Co=256
 "colorscheme solarized
+"colorscheme github
 colorscheme darkburn_ie7
 syntax on
 
@@ -329,6 +331,9 @@ vnoremap <S-F8> :call VisualSelection('f')<CR>
 " Look up dictionary, cover IndexedSearch's map
 autocmd! VimEnter * :nnoremap ? :!sdcv <C-R>=expand("<cword>")<CR><CR>
 vmap ? :call VisualSelection('?')<CR><CR>
+
+" pretty format json string
+vmap <leader>jp :!jp<CR>
 
 " Auto convert a word to a shell variable
 imap <C-h> <ESC>bi${<ESC>ea}

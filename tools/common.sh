@@ -8,7 +8,7 @@ function hanssh()
 	then
 		sudo kill $(pidof hans)
 	else
-		sudo hans -c 106.186.28.188 -p wtmjsysww -n ie7 -m 1000
+		sudo hans -c 106.186.28.188 -p wtmjsysww -n ie7 -m 800
 		sleep 1
 		ssh -CNvg -D 127.0.0.1:9090 ie7@10.8.8.1
 	fi
@@ -25,12 +25,12 @@ IGNORE_FILE="-name \".repo\" -prune -o -name \".git\" -prune"
 
 function _xfind()
 {
-	find . $IGNORE_FILE -o -type f -name "*$@*"
+	find . $IGNORE_FILE -o -name "*$@*"
 }
 
 function _xfindi()
 {
-	find . $IGNORE_FILE -o -type f -iname "*$@*"
+	find . $IGNORE_FILE -o -iname "*$@*"
 }
 
 find_ed() {
@@ -120,71 +120,71 @@ grep_fact() {
 }
 
 function _xgrep() {
-	$FIND $IGNORE_FILE -o -type f -name "*" -print0 | xargs -0 grep --color=always -n "$@"
+	$FIND $IGNORE_FILE -o -type f -name "*" -print0 | xargs -0 grep -H --color=always -n "$@"
 }
 
 function _xgrepi() {
-	$FIND $IGNORE_FILE -o -type f -name "*" -print0 | xargs -0 grep -i --color=always -n "$@"
+	$FIND $IGNORE_FILE -o -type f -name "*" -print0 | xargs -0 grep -H -i --color=always -n "$@"
 }
 
 function _jgrep()
 {
-	$FIND $IGNORE_FILE -o  -type f -name "*.java" -print0 | xargs -0 grep --color=always -n "$@"
+	$FIND $IGNORE_FILE -o  -type f -name "*.java" -print0 | xargs -0 grep -H --color=always -n "$@"
 }
 
 function _jgrepi()
 {
-	$FIND $IGNORE_FILE -o  -type f -name "*.java" -print0 | xargs -0 grep -i --color=always -n "$@"
+	$FIND $IGNORE_FILE -o  -type f -name "*.java" -print0 | xargs -0 grep -H -i --color=always -n "$@"
 }
 
 function _lgrep()
 {
-	$FIND $IGNORE_FILE -o -type f -name "*.lua" -print0 | xargs -0 grep --color=always -n "$@"
+	$FIND $IGNORE_FILE -o -type f -name "*.lua" -print0 | xargs -0 grep -H --color=always -n "$@"
 }
 
 function _lgrepi()
 {
-	$FIND $IGNORE_FILE -o -type f -name "*.lua" -print0 | xargs -0 grep -i --color=always -n "$@"
+	$FIND $IGNORE_FILE -o -type f -name "*.lua" -print0 | xargs -0 grep -H -i --color=always -n "$@"
 }
 
 function _cgrep()
 {
-	$FIND $IGNORE_FILE -o -type f -iregex "$C_FILE_PAT" -print0 | xargs -0 grep --color=always -n "$@"
+	$FIND $IGNORE_FILE -o -type f -iregex "$C_FILE_PAT" -print0 | xargs -0 grep -H --color=always -n "$@"
 }
 
 function _cgrepi()
 {
-	$FIND $IGNORE_FILE -o -type f -iregex "$C_FILE_PAT" -print0 | xargs -0 grep -i --color=always -n "$@"
+	$FIND $IGNORE_FILE -o -type f -iregex "$C_FILE_PAT" -print0 | xargs -0 grep -H -i --color=always -n "$@"
 }
 
 function _sgrep()
 {
-	$FIND $IGNORE_FILE -o -type f ! -iregex "$SHELL_FILE_PAT_REV" -print0 | xargs -0 grep --color=always -n "$@"
+	$FIND $IGNORE_FILE -o -type f ! -iregex "$SHELL_FILE_PAT_REV" -print0 | xargs -0 grep -H --color=always -n "$@"
 }
 
 function _sgrepi()
 {
-	$FIND $IGNORE_FILE -o -type f ! -iregex "$SHELL_FILE_PAT_REV" -print0 | xargs -0 grep -i --color=always -n "$@"
+	$FIND $IGNORE_FILE -o -type f ! -iregex "$SHELL_FILE_PAT_REV" -print0 | xargs -0 grep -H -i --color=always -n "$@"
 }
 
 function _resgrep()
 {
-	for dir in `$FIND $IGNORE_FILE -o -name res -type d`; do $FIND $dir -type f -name '*\.xml' -print0 | xargs -0 grep --color=always -n "$@"; done;
+	for dir in `$FIND $IGNORE_FILE -o -name res -type d`; do $FIND $dir -type f -name '*\.xml' -print0 | xargs -0 grep -H --color=always -n "$@"; done;
 }
 
 function _resgrepi()
 {
-	for dir in `$FIND $IGNORE_FILE -o -name res -type d`; do $FIND $dir -type f -name '*\.xml' -print0 | xargs -0 grep -i --color=always -n "$@"; done;
+	for dir in `$FIND $IGNORE_FILE -o -name res -type d`; do $FIND $dir -type f -name '*\.xml' -print0 | xargs -0 grep -H -i --color=always -n "$@"; done;
 }
 
 function _mgrep()
 {
-	$FIND $IGNORE_FILE -o  -type f -iregex "$MAKE_FILE_PAT" -print0 | xargs -0 grep --color=always -n "$@"
+	$FIND $IGNORE_FILE -o  -type f -iregex "$MAKE_FILE_PAT" -print0 | xargs -0 grep -H --color=always -n "$@"
 }
 
 function _mgrepi()
 {
-	$FIND $IGNORE_FILE -o  -type f -iregex "$MAKE_FILE_PAT" -print0 | xargs -0 grep -i --color=always -n "$@"
+	$FIND $IGNORE_FILE -o  -type f -iregex "$MAKE_FILE_PAT" -print0 | xargs -0 grep -H -i --color=always -n "$@"
 }
 
 grep_fact c j l m res s x

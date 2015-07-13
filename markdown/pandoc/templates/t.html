@@ -49,8 +49,11 @@ $endif$
 </div>
 $endif$
 $if(toc)$
-<div id="$idprefix$TOC">
+<div id="TOC">
+<p>Table of Contents</p>
+<div id="$idprefix$TOC_CONTENT">
 $toc$
+</div>
 </div>
 $endif$
 <div id="$idprefix$main">
@@ -60,4 +63,89 @@ $for(include-after)$
 $include-after$
 $endfor$
 </body>
+<script type="text/javascript">
+var $$ = function (selector) {
+    var cl, id, alls, arrEle = [];
+    if (/^\./.test(selector)) {
+        cl = selector.replace(".", "");
+        alls = document.getElementsByTagName("*"), l = alls.length;
+        for (var i=0; i<l; i+=1) {
+            var name = alls[i].className, arrName = [];
+            if (name) {
+                arrName = name.split(" "), lName = arrName.length;
+                for (var j=0; j<lName; j+=1) {
+                    if (arrName[j] === cl) {
+                        arrEle.push(alls[i]);
+                    }
+                }
+            }
+        }
+    } else if (/^#/.test(selector)) {
+        id = selector.replace("#", "");
+        var o = document.getElementById(id);
+        if (o) {
+            arrEle.push(o);
+        }
+    }
+    return arrEle;
+};
+Array.prototype.click = function(fn) {
+    var l = this.length;
+    if (l) {
+        for (var i=0; i<l; i+=1) {
+            this[i].onclick = function() {
+                fn.call(this);
+            };
+        }
+    }
+};
+$$(".acco_title").click(function() {
+    var rel = this.lang, cl = this.className;
+    if (!/on/.test(cl) && rel) {
+        $$("#" + rel)[0].style.height = "100%";
+        this.className = "acco_title acco_title_on";
+    }
+
+    if (/on/.test(cl) && rel) {
+        $$("#" + rel)[0].style.height = "0";
+        this.className = "acco_title";
+    }
+});
+
+function openheader(obj) {
+    var name = obj? obj.innerHTML: undefined;
+    if (name) {
+        name = name.substring(name.indexOf("</span>") + 8, name.length);
+        name = name.toLowerCase();
+    } else {
+        console.log("name is null");
+        return;
+    }
+
+    var target = document.getElementById(name);
+    if (target) {
+        var tag = target.tagName.toLowerCase();
+        if (tag.indexOf("h3") >= 0) {
+            target = target.parentNode.previousSibling;
+        } else {
+            target = target.parentNode;
+        }
+
+        if (target && target.className && target.className.indexOf("acco_title") >= 0) {
+            target.click();
+        }
+
+        target = target.parentNode.previousSibling;
+        if (target && target.className && target.className.indexOf("acco_title") >= 0) {
+            target.click();
+        }
+    }
+}
+
+var links = document.getElementsByTagName("a");
+for (var i = 0; i < links.length; i++) {
+    links[i].onclick = function(){ openheader(this) };
+}
+
+</script>
 </html>

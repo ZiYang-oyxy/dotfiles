@@ -97,6 +97,7 @@ all_sources()
 	find_other_sources '*.[chS]'
 
 	find_other_sources '*.cpp'
+	find_other_sources '*.hpp'
 
 	find_other_sources '*.lua'
 }
