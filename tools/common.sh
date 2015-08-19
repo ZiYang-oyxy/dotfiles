@@ -190,3 +190,18 @@ function _mgrepi()
 grep_fact c j l m res s x
 
 alias lgrep="grep_ed _lgrep"
+
+function h()
+{
+	if [[ "$2" = "k" ]]; then
+		echo $(($1 / 1024)) KB
+	fi
+
+	if [[ "$2" = "m" ]]; then
+		echo $(($1 / 1024 / 1024)) MB
+	fi
+
+	if [[ "$2" = "g" ]]; then
+		echo $(($1 / 1024 / 1024 /1024)) GB
+	fi
+}

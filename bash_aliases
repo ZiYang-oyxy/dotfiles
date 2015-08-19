@@ -1,5 +1,7 @@
 #!/bin/bash
 
+export VISUAL=vim
+export EDITOR="$VISUAL"
 export PATH=/sbin:~/bin:~/tools:$PATH
 
 TERM=xterm
@@ -30,6 +32,7 @@ esac
 
 alias vi="vim"
 alias d="sdcv"
+alias gvm="cd ~/vm_share"
 
 [ -e ~/.bashrc_notrack ] && . ~/.bashrc_notrack
 . ~/tools/common.sh

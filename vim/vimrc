@@ -188,6 +188,10 @@ map <F6> :cs find d<space>
 "# General
 "###########################
 
+" fix backspace not working:
+" http://stackoverflow.com/questions/11560201/backspace-key-not-working-in-vim-vi
+set backspace=indent,eol,start
+
 " Something useful for myself
 set cmdheight=2
 set scrolloff=10
@@ -329,7 +333,7 @@ nmap <S-F8> /\C\<<C-R>=expand("<cword>")<CR>\><CR>N
 vnoremap <S-F8> :call VisualSelection('f')<CR>
 
 " Look up dictionary, cover IndexedSearch's map
-autocmd! VimEnter * :nnoremap ? :!sdcv <C-R>=expand("<cword>")<CR><CR>
+autocmd! VimEnter * :nnoremap ? :!youdao <C-R>=expand("<cword>")<CR><CR>
 vmap ? :call VisualSelection('?')<CR><CR>
 
 " pretty format json string
@@ -370,7 +374,7 @@ function! VisualSelection(direction) range
     elseif a:direction == 'f'
         execute "normal /" . l:pattern . "^M"
     elseif a:direction == '?'
-        call CmdLine("!sdcv " . l:pattern)
+        call CmdLine("!youdao " . l:pattern)
     endif
 
     let @/ = l:pattern
