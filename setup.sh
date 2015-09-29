@@ -1,34 +1,24 @@
 #!/bin/bash
 
-# my bash custom
-echo -n "Backup your original bash_aliases? (y/n)"
-read IN
-if [ "$IN" = "y" ] || [ "$IN" = "Y" ]; then
-	mv -f ~/.bash_aliases ~/.bash_aliases_backup
-fi
-rm -f ~/.bash_aliases
-ln -s $PWD/bash_aliases ~/.bash_aliases
-echo "=== DONE! ==="
+set -e
 
-# tools
-echo -n "Backup your original ~/tools? (y/n)"
-read IN
-if [ "$IN" = "y" ] || [ "$IN" = "Y" ]; then
-    rm -rf ~/tools_backup; mv -f ~/tools ~/tools_backup
-fi
+DIR=`readlink -f $(dirname $0)`
+
+bash $DIR/bash/setup.sh
+
+echo "=== Setup tools..."
 rm -rf ~/tools
-ln -s $PWD/tools ~/tools
-echo "=== DONE! ==="
+ln -s $DIR/tools ~/tools
+echo "=== Done!"
 
-# vim
-bash $PWD/vim/setup.sh
+bash $DIR/vim/setup.sh
 
-# tmux & powerline
-bash $PWD/tmux/setup.sh
+bash $DIR/git/setup.sh
 
-# git
-rm -f ~/.gitconfig
-ln -s $PWD/gitconfig ~/.gitconfig
+bash $DIR/tmux/setup.sh
 
-# pandoc
-bash $PWD/markdown/pandoc/install.sh
+bash $DIR/fonts/setup.sh
+
+bash $DIR/git/setup.sh
+
+bash $DIR/markdown/pandoc/install4ubuntu64.sh
