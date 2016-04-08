@@ -29,6 +29,9 @@ CORE_CSS=~/.pandoc/pandoc_css/tplink.css
 SIDEBAR_CSS=~/.pandoc/pandoc_css/tplink_sidebar.css
 ACCON_CSS=~/.pandoc/pandoc_css/tplink_accondion.css
 
+CORE_CSS=~/.pandoc/pandoc_css/ie7unnel.css
+SIDEBAR_CSS=
+
 T=t.html
 TOC=--toc
 

@@ -2,10 +2,10 @@
 
 export VISUAL=vim
 export EDITOR="$VISUAL"
-export PATH=/sbin:~/bin:~/tools:$PATH
+export PATH=/sbin:~/bin:~/tools:~/work/arcanist/bin:$PATH
 
 TERM=xterm
-PS1='╔║${debian_chroot:+($debian_chroot)}\[\033[1;34m\]\w\[\033[00m\]║═╗\n╚═>> '
+PS1='╔║${debian_chroot:+($debian_chroot)}\[\033[1;35m\]\w\[\033[00m\]\n╚═>> '
 
 case ${TERM} in
     *)
@@ -36,5 +36,5 @@ alias ll='ls -l'
 alias la='ls -A'
 alias l='ls -CF'
 
-[ -e ~/.bashrc_notrack ] && . ~/.bashrc_notrack
+[ -e ~/.bash_notrack ] && . ~/.bash_notrack
 [ -e ~/tools/common.sh ] && . ~/tools/common.sh

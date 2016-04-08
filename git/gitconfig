@@ -1,6 +1,6 @@
 [user]
 	name = Ouyang Xiongyi
-    email = hh123okbb@gmail.com
+    email = xiongyi.ouyang@feixun.com.cn
 [color]
         ui = always
 [diff]
@@ -12,6 +12,7 @@
         d = diff
 [core]
         excludesfile = ~/.gitignore
+	quotepath = false
 [credential]
 	helper = cache --timeout=3600
 [push]

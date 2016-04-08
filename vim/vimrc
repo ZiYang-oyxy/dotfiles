@@ -71,10 +71,17 @@ let g:ctrlp_custom_ignore = {
 
 " Syntax checker
 "Bundle 'scrooloose/syntastic'
-let g:syntastic_error_symbol='✗'
-let g:syntastic_warning_symbol='⚠'
-map <silent> <leader>sc :SyntasticCheck<CR>
-map <silent> <leader>sr :SyntasticReset<CR>
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
+"let g:syntastic_error_symbol='✗'
+"let g:syntastic_warning_symbol='⚠'
+"map <silent> <leader>sc :SyntasticCheck<CR>
+"map <silent> <leader>sr :SyntasticReset<CR>
 
 " Auto complete
 "Bundle 'Valloric/YouCompleteMe'
@@ -82,7 +89,7 @@ map <silent> <leader>sr :SyntasticReset<CR>
 " Snippet
 Bundle 'msanders/snipmate.vim.git'
 Bundle 'honza/vim-snippets'
-let g:snips_author = 'Ouyang Xiongyi <ouyangxiongyi@tp-link.net>'
+let g:snips_author = 'xiongyi.ouyang <xiongyi.ouyang@phicomm.com.cn>'
 
 " Git
 Bundle  'tpope/vim-fugitive'
@@ -122,10 +129,25 @@ Bundle 'endel/vim-github-colorscheme'
 "set background=light
 set t_Co=256
 "colorscheme solarized
-"colorscheme github
+colorscheme github
 colorscheme darkburn_ie7
 syntax on
 
+Bundle 'rhysd/vim-clang-format'
+let g:clang_format#code_style="Google"
+let g:clang_format#style_options = {
+            \ "AllowShortIfStatementsOnASingleLine" : "false",
+            \ "AlwaysBreakTemplateDeclarations" : "true",
+            \ "Standard" : "C++11",
+            \ "BreakBeforeBraces" : "Stroustrup"}
+
+" map to <Leader>cf in C++ code
+autocmd FileType c,cpp,objc nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
+autocmd FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
+" if you install vim-operator-user
+autocmd FileType c,cpp,objc map <buffer><Leader>x <Plug>(operator-clang-format)
+" Toggle auto formatting:
+nmap <Leader>C :ClangFormatAutoToggle<CR>
 
 " Lua
 Bundle 'xolox/vim-misc'
@@ -149,6 +171,24 @@ augroup END
 let g:vim_json_syntax_conceal = 0
 
 filetype plugin indent on     " required!
+
+" Markdown
+Plugin 'jszakmeister/markdown2ctags'
+" Add support for markdown files in tagbar.
+let g:tagbar_type_markdown = {
+    \ 'ctagstype': 'markdown',
+    \ 'ctagsbin' : '/home/oyxy/.vim/bundle/markdown2ctags/markdown2ctags.py',
+    \ 'ctagsargs' : '-f - --sort=yes',
+    \ 'kinds' : [
+        \ 's:sections',
+        \ 'i:images'
+    \ ],
+    \ 'sro' : '|',
+    \ 'kind2scope' : {
+        \ 's' : 'section',
+    \ },
+    \ 'sort': 0,
+\ }
 
 "###########################
 "# Cscope setting
@@ -188,6 +228,9 @@ map <F6> :cs find d<space>
 "# General
 "###########################
 
+" 设置长按的按键速率
+"xset r rate 330 50
+
 " fix backspace not working:
 " http://stackoverflow.com/questions/11560201/backspace-key-not-working-in-vim-vi
 set backspace=indent,eol,start
@@ -209,6 +252,8 @@ set nu
 
 set lcs=tab:>-,trail:-
 set list
+
+set expandtab
 
 set fileformats=unix,dos
 set autoindent

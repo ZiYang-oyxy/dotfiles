@@ -1,6 +1,9 @@
 #!/bin/bash
 
 ME=`readlink -f $BASH_SOURCE`
+LOG_NAME="oyxy"
+VPS="45.32.74.56"
+PORT="22222"
 
 function hanssh()
 {
@@ -8,15 +11,15 @@ function hanssh()
 	then
 		sudo kill $(pidof hans)
 	else
-		sudo hans -c 106.186.28.188 -p wtmjsysww -n ie7 -m 800
+		sudo hans -c $VPS -p wtmjsysww -n $LOG_NAME -m 800
 		sleep 1
-		ssh -CNvg -D 127.0.0.1:9090 ie7@10.8.8.1
+		ssh -p $PORT -CNvg -D 127.0.0.1:9090 $LOG_NAME@10.8.8.1
 	fi
 }
 
 function hanssh1()
 {
-	ssh -CNvg -D 127.0.0.1:9090 ie7@106.186.28.188
+	ssh -p $PORT -CNvg -D 127.0.0.1:9090 $LOG_NAME@$VPS
 }
 
 ### find
