@@ -89,7 +89,7 @@ let g:ctrlp_custom_ignore = {
 " Snippet
 Bundle 'msanders/snipmate.vim.git'
 Bundle 'honza/vim-snippets'
-let g:snips_author = 'xiongyi.ouyang <xiongyi.ouyang@phicomm.com.cn>'
+let g:snips_author = 'Ouyang Xiongyi'
 
 " Git
 Bundle  'tpope/vim-fugitive'
@@ -133,22 +133,6 @@ colorscheme github
 colorscheme darkburn_ie7
 syntax on
 
-Bundle 'rhysd/vim-clang-format'
-let g:clang_format#code_style="Google"
-let g:clang_format#style_options = {
-            \ "AllowShortIfStatementsOnASingleLine" : "false",
-            \ "AlwaysBreakTemplateDeclarations" : "true",
-            \ "Standard" : "C++11",
-            \ "BreakBeforeBraces" : "Stroustrup"}
-
-" map to <Leader>cf in C++ code
-autocmd FileType c,cpp,objc nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
-autocmd FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
-" if you install vim-operator-user
-autocmd FileType c,cpp,objc map <buffer><Leader>x <Plug>(operator-clang-format)
-" Toggle auto formatting:
-nmap <Leader>C :ClangFormatAutoToggle<CR>
-
 " Lua
 Bundle 'xolox/vim-misc'
 Bundle 'xolox/vim-lua-inspect'
@@ -173,7 +157,7 @@ let g:vim_json_syntax_conceal = 0
 filetype plugin indent on     " required!
 
 " Markdown
-Plugin 'jszakmeister/markdown2ctags'
+Bundle 'jszakmeister/markdown2ctags'
 " Add support for markdown files in tagbar.
 let g:tagbar_type_markdown = {
     \ 'ctagstype': 'markdown',
@@ -189,6 +173,31 @@ let g:tagbar_type_markdown = {
     \ },
     \ 'sort': 0,
 \ }
+
+Bundle 'bling/vim-airline'
+Bundle 'vim-airline/vim-airline-themes'
+let g:airline_theme='bubblegum'
+let g:airline_section_b = ''
+let g:airline_left_sep = '⮀'
+let g:airline_left_alt_sep = '⮁'
+let g:airline_right_sep = '⮂'
+let g:airline_right_alt_sep = '⮃'
+let g:airline#extensions#whitespace#enabled = 0
+let g:airline_mode_map = {
+  \ '__' : '-',
+  \ 'n'  : 'N',
+  \ 'i'  : 'I',
+  \ 'R'  : 'R',
+  \ 'c'  : 'C',
+  \ 'v'  : 'V',
+  \ 'V'  : 'V',
+  \ '' : 'V',
+  \ 's'  : 'S',
+  \ 'S'  : 'S',
+  \ '' : 'S',
+  \ }
+
+
 
 "###########################
 "# Cscope setting
@@ -287,7 +296,7 @@ set undodir=~/.vim/undodir
 set laststatus=2
 
 " Format the status line
-set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ %=c:%c\|l:%l\ \of\ %L\|%p%%\ \ 
+"set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ %=c:%c\|l:%l\ \of\ %L\|%p%%\ \ 
 "set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ --%p%%--
 
 " Returns true if paste mode is enabled
@@ -325,12 +334,6 @@ map <leader>cd :cd %:p:h<CR>:call GetCwd()<CR>
 
 " Reload cscope
 map <leader>rl :cs add cscope.out<CR>
-
-" When you press gv you vimgrep after the selected text
-vmap <leader>gv :call VisualSelection('gv')<CR>
-
-" Open vimgrep and put the cursor in the right position
-nmap <leader>gv :vimgrep // **/*.<left><left><left><left><left><left><left>
 
 " When you press <leader>r you can search and replace the selected text
 " append /g to the end to replace all
@@ -384,6 +387,10 @@ vmap ? :call VisualSelection('?')<CR><CR>
 " pretty format json string
 vmap <leader>jp :!jp<CR>
 
+" pretty format c code
+vmap <leader>cf :!clang-format<CR>
+nmap <leader>cf ggvG<leader>cf<C-o><C-o>
+
 " Auto convert a word to a shell variable
 imap <C-h> <ESC>bi${<ESC>ea}
 imap <C-g> <ESC>bi$(<ESC>ea)
@@ -410,16 +417,14 @@ function! VisualSelection(direction) range
     let l:pattern = escape(@", '\\/.*$^~[]')
     let l:pattern = substitute(l:pattern, "\n$", "", "")
 
-    if a:direction == 'b'
-        execute "normal ?" . l:pattern . "^M"
-    elseif a:direction == 'gv'
-        call CmdLine("vimgrep " . '/'. l:pattern . '/' . ' **/*.')
-    elseif a:direction == 'replace'
+    if a:direction == 'replace'
         call CmdLine("%s" . '/'. l:pattern . '/')
     elseif a:direction == 'f'
         execute "normal /" . l:pattern . "^M"
     elseif a:direction == '?'
         call CmdLine("!youdao " . l:pattern)
+    elseif a:direction == 'jp'
+        call CmdLine("!jp " . l:pattern)
     endif
 
     let @/ = l:pattern
@@ -438,3 +443,5 @@ function! HasPaste()
     en
     return ''
 endfunction
+
+so ~/.vimrc.ow
