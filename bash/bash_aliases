@@ -35,6 +35,7 @@ alias d="sdcv"
 alias ll='ls -l'
 alias la='ls -A'
 alias l='ls -CF'
+alias rr='xset r rate 250 50'
 
 [ -e ~/.bash_notrack ] && . ~/.bash_notrack
 [ -e ~/tools/common.sh ] && . ~/tools/common.sh

@@ -3,6 +3,7 @@
 ME=`readlink -f $BASH_SOURCE`
 LOG_NAME="oyxy"
 VPS="45.32.74.56"
+#VPS="108.61.207.141"
 PORT="22222"
 
 function hanssh()
@@ -191,8 +192,6 @@ function _mgrepi()
 }
 
 grep_fact c j l m res s x
-
-alias lgrep="grep_ed _lgrep"
 
 function h()
 {

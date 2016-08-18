@@ -114,13 +114,17 @@ let g:EasyMotion_mapping_k = ''
 let g:EasyMotion_mapping_n = ''
 let g:EasyMotion_mapping_N = ''
 "Bundle 'goldfeld/vim-seek'
-Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-surround'
 Bundle 'vim-scripts/DrawIt'
 Bundle 'vim-scripts/matrix.vim--Yang'
 Bundle 'vim-scripts/IndexedSearch'
 Bundle 'katonori/binedit'
 "Bundle 'yonchu/accelerated-smooth-scroll'
+
+Bundle 'gabrielelana/vim-markdown'
+let g:markdown_enable_spell_checking = 0
+let g:markdown_enable_mappings = 0
+Bundle 'iamcco/markdown-preview.vim'
 
 Bundle 'altercation/vim-colors-solarized.git'
 Bundle 'endel/vim-github-colorscheme'
@@ -129,9 +133,12 @@ Bundle 'endel/vim-github-colorscheme'
 "set background=light
 set t_Co=256
 "colorscheme solarized
-colorscheme github
+"colorscheme github
 colorscheme darkburn_ie7
 syntax on
+
+"Bundle 'godlygeek/csapprox'
+Bundle 'mbbill/undotree'
 
 " Lua
 Bundle 'xolox/vim-misc'
@@ -262,7 +269,7 @@ set nu
 set lcs=tab:>-,trail:-
 set list
 
-set expandtab
+"set expandtab
 
 set fileformats=unix,dos
 set autoindent
@@ -381,7 +388,7 @@ nmap <S-F8> /\C\<<C-R>=expand("<cword>")<CR>\><CR>N
 vnoremap <S-F8> :call VisualSelection('f')<CR>
 
 " Look up dictionary, cover IndexedSearch's map
-autocmd! VimEnter * :nnoremap ? :!youdao <C-R>=expand("<cword>")<CR><CR>
+autocmd! VimEnter * :nnoremap ? :!sdcv <C-R>=expand("<cword>")<CR><CR>
 vmap ? :call VisualSelection('?')<CR><CR>
 
 " pretty format json string
@@ -422,7 +429,7 @@ function! VisualSelection(direction) range
     elseif a:direction == 'f'
         execute "normal /" . l:pattern . "^M"
     elseif a:direction == '?'
-        call CmdLine("!youdao " . l:pattern)
+        call CmdLine("!sdcv " . l:pattern)
     elseif a:direction == 'jp'
         call CmdLine("!jp " . l:pattern)
     endif
