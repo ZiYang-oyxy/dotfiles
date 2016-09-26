@@ -6,5 +6,5 @@ DIR=`readlink -f $(dirname $0)`
 
 echo "=== Setup git..."
 rm -f ~/.gitconfig
-ln -s $DIR/gitconfig ~/.gitconfig
+cp $DIR/gitconfig.temp ~/.gitconfig
 echo "=== Done!"

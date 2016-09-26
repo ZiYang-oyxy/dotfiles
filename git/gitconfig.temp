@@ -1,17 +1,16 @@
 [user]
-	name = Ouyang Xiongyi
+	name = xiongyi.ouyang
 	email = xiongyi.ouyang@feixun.com.cn
 [color]
-        ui = always
+	ui = always
 [diff]
-        tool = vimdiff
+	tool = vimdiff
 [difftool]
-        prompt = false
+	prompt = false
 [alias]
-        s = status
-        d = diff
+	s = status
+	d = diff
 [core]
-        excludesfile = ~/.gitignore
 	quotepath = false
 [credential]
 	helper = cache --timeout=3600
