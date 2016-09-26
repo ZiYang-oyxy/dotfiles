@@ -6,8 +6,7 @@ echo "=== Setup pandoc..."
 
 DIR=`readlink -f $(dirname $0)`
 
-#sudo apt-get install pandoc
-# download from https://packages.debian.org/source/experimental/pandoc
+# install newest version of pandoc from https://github.com/jgm/pandoc/releases
 
 cd $DIR
 mkdir -p ~/bin ~/.pandoc
