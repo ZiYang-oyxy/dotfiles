@@ -2,14 +2,13 @@ body {
    font: 14px 'Segoe UI','Segoe UI Web Regular','Segoe UI Symbol','Lato','Helvetica Neue',Helvetica,Arial,sans-serif;
    background-color: white;
    padding: 6px; }
-
 body > *:first-child {
    margin-top: 0 !important; }
 body > *:last-child {
    margin-bottom: 0 !important; }
 
 a {
-   color: #4183C4; }
+   color: #4183c4; }
 a.absent {
    color: #cc0000; }
 a.anchor {
@@ -37,13 +36,84 @@ a:active {
     text-decoration: underline;
 }
 
+img#logo{
+	width:200px;
+	height:45px;
+}
+
+div#banner{
+	padding:20px;	
+	border-bottom:1px solid black;
+	margin-bottom:30px;
+}
+
+div#title{
+	text-align:center;
+	font-size:50px;
+	font-family:"Arial","Microsoft YaHei","黑体","宋体",sans-serif;
+	margin-bottom:100px;
+	font-weight:bold;
+}
+
+div#author,div#hst{
+	font-size:large;
+	font-family:"Arial","Microsoft YaHei","黑体","宋体",sans-serif;
+	font-weight:bold;
+}
+
+div#author{
+	margin:50px 0px 80px 850px;
+}
+
+div#hst{
+	text-align:center;
+}
+
+div#history{
+	margin-bottom:40px;
+}
+
+div#TOC_CONTENT{
+	margin-left:30px;
+	font-size:large;
+}
+
+div.catalog{
+	width:33%;
+	float:left;	
+}
+
+div.catalog ul ul{
+	margin:10px 0px 10px 15px;
+	pading:0px;
+    list-style-type: circle;
+	font-size:16px;
+}
+
+div.catalog ul ul ul{
+	list-style-type: square;
+	margin:10px 0px 10px 5px;
+}
+
+div#main{
+	font-family:"Arial","Microsoft YaHei","黑体","宋体",sans-serif;
+	font-size:16px;	
+	line-height:2em;
+}
+
+div.footnotes{
+	font-size:13px;	
+}
+
 h1, h2, h3, h4, h5, h6 {
    margin: 20px 0 10px;
    padding: 0;
    font-weight: bold;
    -webkit-font-smoothing: antialiased;
    cursor: text;
-   position: relative; }
+   position: relative;
+   color:#4169E1;
+}
 
 h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor {
    text-decoration: none; }
@@ -67,13 +137,16 @@ h6 tt, h6 code {
    font-size: inherit; }
 
 h1 {
+   margin : 40px 5px 40px 5px;
    font-size: 28px;
-   color: black; }
+   border-top:1px solid #333;
+   padding-top:40px;
+ }
 
 h2 {
    font-size: 24px;
    border-bottom: 1px solid #cccccc;
-   color: black; }
+}
 
 h3 {
    font-size: 18px; }
@@ -86,12 +159,19 @@ h5 {
 
 h6 {
    color: #777777;
-   font-size: 14px; }
+   font-size: 14px; 
+ }
 
 p, blockquote, ol, dl, li, table, pre {
-   margin: 15px 0; }
-
-hr{margin-top:20px;margin-bottom:20px;border:0;border-top:1px solid #eee}
+   margin: 15px 0;   }
+   
+em{
+	font-family:Helvetica, 'Hiragino Sans GB', 'Microsoft Yahei', '微软雅黑', Arial, sans-serif;
+	font-size:16px;
+	color: #464C5C;
+	background-color:#f5f5f5;
+	font-style:normal;
+}
 
 body > h2:first-child {
    margin-top: 0;
@@ -119,15 +199,18 @@ li {
    margin: 0; }
 ul, ol {
    padding-left: 20px; }
+   
+ol li{
+   margin-left: 30px;
+}
 
 ul :first-child, ol :first-child {
    margin-top: 0;
    }
 
 dl {
-   padding: 0; }
+   padding: 0 0 0 10px; }
 dl dt {
-   font-size: 14px;
    font-weight: bold;
    font-style: italic;
    padding: 0;
@@ -156,13 +239,13 @@ blockquote > :last-child {
    margin-bottom: 0; }
 blockquote {
     display: block;
-    -webkit-margin-before: 1em;
-    -webkit-margin-after: 1em;
+    -webkit-margin-before: 1.2em;
+    -webkit-margin-after: 1.2em;
     -webkit-margin-start: 40px;
     -webkit-margin-end: 40px;
     border-left: 3px solid #a7b5bf;
     color: #464C5C;
-    font-style: italic;
+    font-style: normal;
     margin: 4px 0 12px 0;
     padding: 8px 12px;
     background-color: #F8F9FC;
@@ -170,7 +253,7 @@ blockquote {
 
 
 table {
-   padding: 0;border-collapse: collapse; }
+   padding:0;border-collapse: collapse; width:90%;margin:10px auto;}
 table tr {
    border-top: 1px solid #cccccc;
    background-color: white;
@@ -182,11 +265,11 @@ table tr th {
    font-weight: bold;
    border: 1px solid #cccccc;
    margin: 0;
-   padding: 6px 13px; }
+   padding: 6px 13px;text-align:center; }
 table tr td {
    border: 1px solid #cccccc;
    margin: 0;
-   padding: 6px 13px; }
+   padding: 6px 13px;text-align:center; }
 table tr th :first-child, table tr td :first-child {
    margin-top: 0; }
 table tr th :last-child, table tr td :last-child {
@@ -207,6 +290,9 @@ div.figure p {
 /*    margin-left: auto;
     margin-right: auto; */
     text-align: center;
+}
+div.figure img {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 img.scaled {
   width: 100%;
@@ -281,8 +367,8 @@ samp {
 }
 code {
   padding: 2px 4px;
-  font-size: 90%;
-  color: #E66747;
+  font-size: 100%;
+  color: #990066;
   background-color: #f5f5f5;
   border-radius: 4px;
 }
@@ -316,6 +402,7 @@ pre code {
   white-space: pre-wrap;
   background-color: transparent;
   border-radius: 0;
+  line-height:1.2em;
 }
 
 sup {
@@ -329,7 +416,7 @@ sup {
 
 @media screen and (min-width: 1064px) {
    body {
-      width: 1004px;
+      width:1004px;
       margin:0 auto;
    }
 }
