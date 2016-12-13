@@ -133,8 +133,8 @@ Bundle 'endel/vim-github-colorscheme'
 "set background=light
 set t_Co=256
 "colorscheme solarized
-"colorscheme github
 colorscheme darkburn_ie7
+"colorscheme github
 syntax on
 
 "Bundle 'godlygeek/csapprox'
@@ -450,5 +450,3 @@ function! HasPaste()
     en
     return ''
 endfunction
-
-so ~/.vimrc.ow
