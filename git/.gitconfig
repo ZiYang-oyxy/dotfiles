@@ -1,6 +1,3 @@
-[user]
-	name = xiongyi.ouyang
-	email = xiongyi.ouyang@feixun.com.cn
 [color]
 	ui = always
 [diff]
@@ -16,3 +13,5 @@
 	helper = cache --timeout=3600
 [push]
 	default = matching
+[include]
+	    path = ~/.gitconfig_ignored

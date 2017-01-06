@@ -47,9 +47,10 @@ alias xfindi="find_ed _xfindi"
 ### grep
 
 FIND='find . -regextype posix-egrep'
-SHELL_FILE_PAT_REV="(.*/(Makefile|makefile)|.*\.(c|h|cpp|S|java|xml|mk|lua))"
+SHELL_FILE_PAT_REV="(.*/(Makefile|makefile)|.*\.(c|h|cpp|S|java|xml|mk|lua|go))"
 C_FILE_PAT=".*\.(c|cc|cpp|h)"
 MAKE_FILE_PAT="(.*/(Makefile|makefile)|.*\.(mk))"
+GO_FILE_PAT=".*\.(go)"
 
 grep_ed() {
 	# EXAMPLE:
@@ -82,8 +83,8 @@ grep_ed() {
 		if (num > i || num < 1)
 			exit
 
-		file = gensub(/^.{8}([^\033]+).{29}([0-9]+).*/, "\\1", "", lines[num])
-		row = gensub(/^.{8}([^\033]+).{29}([0-9]+).*/, "\\2", "", lines[num])
+		file = gensub(/^.{8}([^\033]+).{29}([0-9]+).*/, "\\1", "g", lines[num])
+		row = gensub(/^.{8}([^\033]+).{29}([0-9]+).*/, "\\2", "g", lines[num])
 
 		system(sprintf("vim +%s %s", row, file))
 		printf("goto: ")
@@ -138,6 +139,16 @@ function _cgrepi()
 	$FIND $IGNORE_FILE -o -type f -iregex "$C_FILE_PAT" -print0 | xargs -0 grep -H -i --color=always -n "$@"
 }
 
+function _gogrep()
+{
+	$FIND $IGNORE_FILE -o -type f -iregex "$GO_FILE_PAT" -print0 | xargs -0 grep -H --color=always -n "$@"
+}
+
+function _gogrepi()
+{
+	$FIND $IGNORE_FILE -o -type f -iregex "$GO_FILE_PAT" -print0 | xargs -0 grep -H -i --color=always -n "$@"
+}
+
 function _sgrep()
 {
 	$FIND $IGNORE_FILE -o -type f ! -iregex "$SHELL_FILE_PAT_REV" -print0 | xargs -0 grep -H --color=always -n "$@"
@@ -168,7 +179,7 @@ function _mgrepi()
 	$FIND $IGNORE_FILE -o  -type f -iregex "$MAKE_FILE_PAT" -print0 | xargs -0 grep -H -i --color=always -n "$@"
 }
 
-grep_fact c j l m res s x
+grep_fact c j l m res s x go
 
 function h()
 {

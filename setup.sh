@@ -17,11 +17,9 @@ bash $DIR/git/setup.sh
 
 bash $DIR/tmux/setup.sh
 
-bash $DIR/fonts/setup.sh
+#bash $DIR/fonts/setup.sh
 
-bash $DIR/git/setup.sh
-
-bash $DIR/markdown/pandoc/install4ubuntu64.sh
+#bash $DIR/markdown/pandoc/install4ubuntu64.sh
 
 # 长按延迟
-xset r rate 220 160
+#xset r rate 220 160

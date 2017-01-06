@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"$if(lang)$ lang="$lang$" xml:lang="$lang$"$endif$>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+$for(author-meta)$
+  <meta name="author" content="$author-meta$" />
+$endfor$
+$if(date-meta)$
+  <meta name="date" content="$date-meta$" />
+$endif$
+  <title>$if(title-prefix)$$title-prefix$ - $endif$$pagetitle$</title>
+  <style type="text/css">code{white-space: pre;}</style>
+$if(quotes)$
+  <style type="text/css">q { quotes: "“" "”" "‘" "’"; }</style>
+$endif$
+$if(highlighting-css)$
+  <style type="text/css">
+$highlighting-css$
+  </style>
+$endif$
+$for(css)$
+  <link rel="stylesheet" href="$css$" $if(html5)$$else$type="text/css" $endif$/>
+$endfor$
+$if(math)$
+  $math$
+$endif$
+$for(header-includes)$
+  $header-includes$
+$endfor$
+</head>
+<body>
+<div id="body">
+<div id="banner">
+	<img id="logo" src="data:image/png;base64,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" />
+</div>
+<div id="title"></div>
+<div id="hst">版本历史</div>
+<div id="history"></div>
+$for(include-before)$
+$include-before$
+$endfor$
+
+$if(toc)$
+<span id="navtoggle" onclick="navToggle()"><a>&#9776</a></span>
+<div id="TOC">
+<div id="$idprefix$TOC_NAV" class="sidenav">
+$toc$
+</div>
+<h1>目录</h1>
+<div id="$idprefix$TOC_CONTENT">
+$toc$
+</div>
+</div>
+$endif$
+
+<div id="$idprefix$main">
+$body$
+</div>
+$for(include-after)$
+$include-after$
+$endfor$
+</div>
+</body>
+<script type="text/javascript">
+	document.getElementById("title").innerHTML=document.title;
+	t=document.getElementsByTagName("table");
+	h=document.getElementById("history");
+	h.innerHTML=t[0].outerHTML;
+	t[1].remove();
+</script>
+<script type="text/javascript">
+var $$ = function (selector) {
+    var cl, id, alls, arrEle = [];
+    if (/^\./.test(selector)) {
+        cl = selector.replace(".", "");
+        alls = document.getElementsByTagName("*"), l = alls.length;
+        for (var i=0; i<l; i+=1) {
+            var name = alls[i].className, arrName = [];
+            if (name) {
+                arrName = name.split(" "), lName = arrName.length;
+                for (var j=0; j<lName; j+=1) {
+                    if (arrName[j] === cl) {
+                        arrEle.push(alls[i]);
+                    }
+                }
+            }
+        }
+    } else if (/^#/.test(selector)) {
+        id = selector.replace("#", "");
+        var o = document.getElementById(id);
+        if (o) {
+            arrEle.push(o);
+        }
+    }
+    return arrEle;
+};
+Array.prototype.click = function(fn) {
+    var l = this.length;
+    if (l) {
+        for (var i=0; i<l; i+=1) {
+            this[i].onclick = function() {
+                fn.call(this);
+            };
+        }
+    }
+};
+$$(".acco_title").click(function() {
+    var rel = this.lang, cl = this.className;
+    if (!/on/.test(cl) && rel) {
+        $$("#" + rel)[0].style.height = "100%";
+        this.className = "acco_title acco_title_on";
+    }
+
+    if (/on/.test(cl) && rel) {
+        $$("#" + rel)[0].style.height = "0";
+        this.className = "acco_title";
+    }
+});
+
+function openheader(obj) {
+    var name = obj? obj.innerHTML: undefined;
+    if (name) {
+        name = name.substring(name.indexOf("</span>") + 8, name.length);
+        name = name.toLowerCase();
+    } else {
+        console.log("name is null");
+        return;
+    }
+
+    var target = document.getElementById(name);
+    if (target) {
+        var tag = target.tagName.toLowerCase();
+        if (tag.indexOf("h3") >= 0) {
+            target = target.parentNode.previousSibling;
+        } else {
+            target = target.parentNode;
+        }
+
+        if (target && target.className && target.className.indexOf("acco_title") >= 0) {
+            target.click();
+        }
+
+        target = target.parentNode.previousSibling;
+        if (target && target.className && target.className.indexOf("acco_title") >= 0) {
+            target.click();
+        }
+    }
+}
+
+var links = document.getElementsByTagName("a");
+for (var i = 0; i < links.length; i++) {
+    links[i].onclick = function(){ openheader(this) };
+}
+
+var nav_opened
+function navToggle() {
+    if (nav_opened == 1) {
+        document.getElementById("TOC_NAV").style.width = "0";
+        nav_opened = 0;
+    } else {
+        document.getElementById("TOC_NAV").style.width = "250px";
+        nav_opened = 1;
+    }
+}
+
+</script>
+</html>
