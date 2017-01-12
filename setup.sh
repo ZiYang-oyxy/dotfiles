@@ -4,12 +4,16 @@ set -e
 
 DIR=`readlink -f $(dirname $0)`
 
+. "$DIR"/_common.sh
+
+trap fini EXIT INT TERM
+
 bash $DIR/bash/setup.sh
 
-echo "=== Setup tools..."
+log "Setup tools..."
 rm -rf ~/tools
 ln -s $DIR/tools ~/tools
-echo "=== Done!"
+log "Done!"
 
 bash $DIR/vim/setup.sh
 
@@ -23,3 +27,6 @@ bash $DIR/tmux/setup.sh
 
 # 长按延迟
 #xset r rate 220 160
+
+trap - EXIT
+log "All Done!"

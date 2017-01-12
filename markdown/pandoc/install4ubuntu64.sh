@@ -2,9 +2,10 @@
 
 set -e
 
-echo "=== Setup pandoc..."
-
 DIR=`readlink -f $(dirname $0)`
+ROOT=$DIR/../..
+
+log "Setup pandoc..."
 
 # install newest version of pandoc from https://github.com/jgm/pandoc/releases
 
@@ -15,4 +16,4 @@ rm -f ~/.pandoc/pandoc_css ~/.pandoc/templates
 ln -s $DIR/pandoc_css ~/.pandoc/pandoc_css
 ln -s $DIR/templates ~/.pandoc/templates
 
-echo "=== Done!"
+log "Done!"

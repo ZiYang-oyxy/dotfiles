@@ -1,0 +1,7 @@
+Acquire::http::proxy {
+        rnd-mirrors.huawei.com DIRECT;
+        apt-cache DIRECT;
+};
+Acquire::http::Proxy "http://o00403675:xxx@172.18.32.221:8080";
+Acquire::https::Proxy "http://o00403675:xxx@172.18.32.221:8080";
+Acquire::ftp::Proxy "http://o00403675:xxx@172.18.32.221:8080";

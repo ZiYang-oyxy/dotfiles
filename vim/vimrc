@@ -65,6 +65,11 @@ let g:ctrlp_custom_ignore = {
 \ 'file': '\v\.(exe|so|dll)$',
 \ }
 
+Bundle 'ivalkeen/vim-ctrlp-tjump'
+nnoremap <c-]> :CtrlPtjump<cr>
+vnoremap <c-]> :CtrlPtjumpVisual<cr>
+let g:ctrlp_tjump_skip_tag_name = 1
+let g:ctrlp_tjump_only_silent = 1
 
 " Grep
 "Bundle 'rking/ag.vim'
@@ -185,6 +190,7 @@ Bundle 'bling/vim-airline'
 Bundle 'vim-airline/vim-airline-themes'
 let g:airline_theme='bubblegum'
 let g:airline_section_b = ''
+let g:airline_section_y = ''
 let g:airline_left_sep = '⮀'
 let g:airline_left_alt_sep = '⮁'
 let g:airline_right_sep = '⮂'
@@ -256,14 +262,14 @@ endif
 "f: Find this file
 "	*gf* will be more helpful without cscope database
 "i: Find files #including this file
-map <C-@>s :cs find s <C-R>=expand("<cword>")<CR><CR>
-map <C-@>g :cs find g <C-R>=expand("<cword>")<CR><CR>
-map <C-@>c :cs find c <C-R>=expand("<cword>")<CR><CR>
-map <C-@>t :cs find t <C-R>=expand("<cword>")<CR><CR>
-map <C-@>d :cs find d <C-R>=expand("<cword>")<CR><CR>
-map <C-@>e :cs find e <C-R>=expand("<cword>")<CR><CR>
-map <C-@>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
-map <C-@>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+noremap <C-@>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+noremap <C-@>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+noremap <C-@>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+noremap <C-@>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+noremap <C-@>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+noremap <C-@>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+noremap <C-@>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+noremap <C-@>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 map <F6> :cs find d<space>
 
 "###########################
@@ -307,7 +313,6 @@ set foldlevel=50
 set autoread
 set wildmenu
 set wildignore=*.o,*~,*.pyc
-set mouse=a
 if has('mouse')
     set mouse=a
 endif
@@ -430,7 +435,7 @@ vmap <leader>cf :!clang-format -style=file<CR>
 nmap <leader>cf ggvG<leader>cf<C-o><C-o>
 
 " Auto convert a word to a shell variable
-imap <C-h> <ESC>bi${<ESC>ea}
+imap <C-h> <ESC>bi"$<ESC>ea"
 imap <C-g> <ESC>bi$(<ESC>ea)
 
 " jump to the match brace

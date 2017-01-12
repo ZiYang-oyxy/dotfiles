@@ -1,13 +1,2 @@
-*.py[cod]
-*.sw?
-*~
-.DS_Store
-.ropeproject
-tags
-todo.txt
-.netrwhist
-repoo
-vim/vim-base/bundle
 vim/vim-base/undodir
-vim/stardict-langdao-ec-gb-2.4.2.tar.gz
-vim/stardict-langdao-ce-gb-2.4.2.tar.gz
+vim/vim-base/bundle

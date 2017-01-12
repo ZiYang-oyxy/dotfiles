@@ -1,9 +1,0 @@
-[user]
-	name = %DOMAIN
-	email = %EMAIL
-
-[http]
-	proxy = http://%DOMAIN:%PASSWD@172.18.32.221:8080
-	sslVerify = false
-[https]
-	proxy = http://%DOMAIN:%PASSWD@172.18.32.221:8080

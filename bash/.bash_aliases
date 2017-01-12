@@ -41,5 +41,5 @@ alias rr='xset r rate 250 50'
 [ -e ~/.bashrc_ignored ] && . ~/.bashrc_ignored
 [ -e ~/tools/common.sh ] && . ~/tools/common.sh
 
-[[ -s /home/oyxy/.autojump/etc/profile.d/autojump.sh ]] && source /home/oyxy/.autojump/etc/profile.d/autojump.sh
+[[ -s ~/.autojump/etc/profile.d/autojump.sh ]] && source ~/.autojump/etc/profile.d/autojump.sh
 alias s='j -s'

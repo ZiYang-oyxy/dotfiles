@@ -3,8 +3,12 @@
 set -e
 
 DIR=`readlink -f $(dirname $0)`
+ROOT=$DIR/..
 
-echo "=== Setup bash..."
+. $ROOT/_common.sh
+
+log "Setup bash..."
+
 rm -f ~/.bash_aliases
 rm -f ~/.bashrc
 rm -f ~/.profile
@@ -14,4 +18,5 @@ ln -s $DIR/.profile ~/.profile
 if [[ ! -e ~/.bashrc_ignored ]]; then
 	cp -f $DIR/.bashrc_ignored ~/.bashrc_ignored
 fi
-echo "=== Done!"
+
+log "Done!"

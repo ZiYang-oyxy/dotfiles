@@ -3,7 +3,8 @@
 set -e
 
 DIR=`readlink -f $(dirname $0)`
-ROOT=$DIR/..
+ROOT=$DIR/../../..
+VIMDIR=$DIR/../../../vim
 
 . $ROOT/_common.sh
 
@@ -13,15 +14,13 @@ log "Setup vim..."
 rm -rf ~/.vim
 rm -f ~/.vimrc
 
-ln -sd $DIR/vim-base ~/.vim
-ln -s $DIR/vimrc ~/.vimrc
+ln -sd $VIMDIR/vim-base ~/.vim
+ln -s $VIMDIR/vimrc ~/.vimrc
 
 # for persistant undo
 mkdir -p ~/.vim/undodir
 
-[ -d ~/.vim/bundle/vundle ] || {
-git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-}
+#TODO install vundle
 
 if ! type ctags >/dev/null 2>&1; then
     sudo apt-get install exuberant-ctags
