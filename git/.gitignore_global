@@ -1,0 +1,10 @@
+tags
+*.swn
+*.swp
+*.swo
+cscope.files
+cscope.out
+cscope.out.in
+cscope.out.po
+ccglue.out.idx
+ccglue.out

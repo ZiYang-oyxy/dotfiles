@@ -1,0 +1,294 @@
+#!/bin/bash
+
+function get_vm_ip() {
+    case $1 in
+        "vm1")
+            echo "10.67.135.232"
+            ;;
+        "vm2")
+            echo "10.67.135.214"
+            ;;
+        "vm3")
+            echo "10.67.135.243"
+            ;;
+        "vm4")
+            echo "10.67.135.220"
+            ;;
+        "29")
+            echo "192.108.20.29"
+            ;;
+        "30")
+            echo "192.108.20.30"
+            ;;
+        "231")
+            echo "10.136.132.231"
+            ;;
+        "232")
+            echo "10.136.132.232"
+			;;
+        "233")
+            echo "10.136.132.233"
+            ;;
+        "234")
+            echo "10.136.132.234"
+            ;;
+    esac
+}
+
+function ggg() {
+    case $1 in
+        "public")
+            SRV_IP="public@10.67.132.71"
+            PSWD="public"
+#ARM的发布件：
+#/home/ci_v2r1c00/daily/Software/RTOSEmbedded/arm64be_4.1_ek
+#/home/ci_v2r1c00/daily/Software/LinuxHostTools
+#X86的发布件
+#/home/ci_v2r1c00/daily/Software/RTOSServer
+            ;;
+        "x86ci")
+            SRV_IP="root@10.90.52.177"
+            PSWD="huawei"
+            ;;
+        "src")
+            SRV_IP="oyxy@10.90.53.47"
+            PSWD="qweqwe"
+            ;;
+        "150")
+            SRV_IP="root@10.67.189.150"
+            PSWD="huawei"
+            ;;
+        *)
+            echo "fail"
+            return
+            ;;
+    esac
+
+    set -x
+    sshpass -p $PSWD ssh $SRV_IP
+    set +x
+}
+
+function rs_src() {
+	sshpass -p qweqwe rsync --delete \
+            --exclude="*.swp" \
+            --exclude="cscope.out.in" \
+            --exclude="cscope.out" \
+            --exclude="cscope.files" \
+            --exclude="cscope.out.po" \
+            --exclude="tags" \
+            --exclude=".git" \
+            -avP /root/work/DPDK/ oyxy@10.90.53.47:/home2/oyxy/libos_dpdk/cloudRAN/DPDK
+	sshpass -p qweqwe rsync -avP /root/work/DPDK/.git/ oyxy@10.90.53.47:/home2/oyxy/libos_dpdk/.mm/projects/cloudRAN/DPDK/RTOS/DPDK.git
+}
+
+function rs_vnf() {
+	sshpass -p qweqwe rsync --delete \
+            --exclude="*.swp" \
+            --exclude="cscope.out.in" \
+            --exclude="cscope.out" \
+            --exclude="cscope.files" \
+            --exclude="cscope.out.po" \
+            --exclude="tags" \
+            --exclude=".git" \
+            -avP ~/rtos_sdk-x86_64_4.1.12/libos-lc-vnf/ oyxy@10.90.53.47:/home2/oyxy/libos_dpdk/cloudRAN/libos-vnf/libos-lc-vnf
+	sshpass -p qweqwe rsync -avP ~/rtos_sdk-x86_64_4.1.12/libos-lc-vnf/.git/ oyxy@10.90.53.47:/home2/oyxy/libos_dpdk/.mm/projects/cloudRAN/libos-vnf/libos-lc-vnf/RTOS/libos-lc-vnf.git
+}
+
+function rs_vnf_lr() {
+    sshpass -p qweqwe rsync --delete --exclude="*.swp" --exclude="cscope.out.in" --exclude="cscope.out" --exclude="cscope.files" --exclude="cscope.out.po" --exclude="tags" --exclude=".git" -avP ~/rtos_sdk-x86_64_4.1.12/libos-lr-vnf/ oyxy@10.90.53.47:/home2/oyxy/libos_dpdk/cloudRAN/libos-vnf/libos-lr-vnf;
+    sshpass -p qweqwe rsync -avP ~/rtos_sdk-x86_64_4.1.12/libos-lr-vnf/.git/ oyxy@10.90.53.47:/home2/oyxy/libos_dpdk/.mm/projects/cloudRAN/libos-vnf/libos-lr-vnf/RTOS/libos-lr-vnf.git
+}
+
+function rs_sdk() {
+	rsync --exclude="*.swp" \
+            --exclude="cscope.out.in" \
+            --exclude="cscope.out" \
+            --exclude="cscope.files" \
+            --exclude="cscope.out.po" \
+            --exclude="tags" \
+            --exclude=".git" \
+            -avP /root/work/DPDK/  ~/rtos_osc_env/var/tmp/build-root/standard-x86_64/home/abuild/rpmbuild/BUILD/dpdk-16.11.2
+	chown -R 399:399 ~/rtos_osc_env/var/tmp/build-root/standard-x86_64/home/abuild/rpmbuild/BUILD/dpdk-16.11.2
+}
+
+
+function rs_leib() {
+    cd ~
+    rsync --exclude="*.swp" \
+            --exclude="cscope.out.in" \
+            --exclude="cscope.out" \
+            --exclude="cscope.files" \
+            --exclude="cscope.out.po" \
+            --exclude="*.o" \
+            --exclude="*.so" \
+            --exclude="*.a" \
+            --exclude="*.ko" \
+            --exclude="tags" \
+            --exclude=".git" \
+            -avP ~/work/leibniz/ root@`get_vm_ip $1`:~/leibniz
+    cd - 2>&1 >/dev/null
+}
+
+function rs_nstack() {
+    rsync --exclude=".git" --exclude=".svn" --exclude="*.swp" --exclude="cscope.out.in" --exclude="cscope.out" --exclude="cscope.files" --exclude="cscope.out.po" --exclude="tags" -avP ~/work/CODE/ root@`get_vm_ip $1`:/product/sdk/home/tony/CODE
+}
+
+function rs_release_r() {
+    rsync --exclude=".git" --exclude=".svn" --exclude="*.swp" --exclude="cscope.out.in" --exclude="cscope.out" --exclude="cscope.files" --exclude="cscope.out.po" --exclude="tags" -avP root@`get_vm_ip $1`:~/nstack_release/ ~/work/nstack_release
+}
+
+function rs_release() {
+    rsync --exclude=".git" --exclude=".svn" --exclude="*.swp" --exclude="cscope.out.in" --exclude="cscope.out" --exclude="cscope.files" --exclude="cscope.out.po" --exclude="tags" -avP ~/work/nstack_release/ root@`get_vm_ip $1`:~/nstack_release
+}
+
+function rs_mixmode() {
+    rsync --exclude=".git" --exclude=".svn" --exclude="*.swp" --exclude="cscope.out.in" --exclude="cscope.out" --exclude="cscope.files" --exclude="cscope.out.po" --exclude="tags" -avP ~/work/mixmode_bin/ root@`get_vm_ip $1`:~/mixmode_bin
+}
+
+function rs_mixmode_r() {
+    rsync --exclude=".git" --exclude=".svn" --exclude="*.swp" --exclude="cscope.out.in" --exclude="cscope.out" --exclude="cscope.files" --exclude="cscope.out.po" --exclude="tags" -avP root@`get_vm_ip $1`:~/mixmode_bin/ ~/work/mixmode_bin
+}
+function rs_shaojun() {
+    rsync --exclude=".git" --exclude=".svn" --exclude="*.swp" --exclude="cscope.out.in" --exclude="cscope.out" --exclude="cscope.files" --exclude="cscope.out.po" --exclude="tags" -avP root@10.67.128.207:/home/tony/CODE/src/nStack/ ~/work/CODE/src/nStack
+}
+
+function rs_shaojun_r() {
+    rsync --exclude=".git" --exclude=".svn" --exclude="*.swp" --exclude="cscope.out.in" --exclude="cscope.out" --exclude="cscope.files" --exclude="cscope.out.po" --exclude="tags" -avP ~/work/CODE/src/nStack/ root@10.67.128.207:/home/tony/CODE/src/nStack
+}
+
+function rs_bz() {
+	scp /mnt/rtos/home/o00403675/build-root/home/abuild/rpmbuild/BUILD/kernel-3.10.0-229.el7/linux-3.10.0-327.36.58.4.x86_64/arch/x86/boot/bzImage.signed root@`get_vm_ip $1`:/boot
+}
+
+function rs_uio() {
+	scp /mnt/rtos/home/o00403675/build-root/home/abuild/rpmbuild/BUILD/kernel-3.10.0-229.el7/linux-3.10.0-327.36.58.4.x86_64/drivers/uio/uio.ko root@`get_vm_ip $1`:/lib/modules/3.10.0-327.36.58.4.x86_64/kernel/drivers/uio/uio.ko
+}
+
+function rs_bz_oyxy() {
+	scp /mnt/rtos/home/o00403675/build-root/home/abuild/tmp/arch/x86/boot/bzImage.signed root@`get_vm_ip $1`:/boot
+}
+
+function rs_rpm() {
+	cp ~/rtos_osc_env/var/tmp/build-root/standard-x86_64/home/abuild/rpmbuild/RPMS/x86_64/*.rpm ~/204/rtos_sdk-x86_64_4.1.12
+}
+
+function rs_cap() {
+	rsync -avP \
+		/work/oyxy/leibniz/cap/src/cap \
+		/work/oyxy/leibniz/cap/src/config.osal \
+		/work/oyxy/leibniz/dpdk/dpdk-16.11/x86_64-native-linuxapp-gcc/lib/libdpdk.so \
+		/work/oyxy/leibniz/dpdk/dpdk-16.11/x86_64-native-linuxapp-gcc/kmod/igb_uio.ko \
+		/work/oyxy/leibniz/dpdk/dpdk-16.11/x86_64-native-linuxapp-gcc/kmod/rte_kni.ko \
+		/work/oyxy/linux/drivers/uio/uio.ko \
+		root@`get_vm_ip $1`:/tmp/oyxy
+}
+
+function rs_power() {
+	rsync -avP \
+		/work/oyxy/power_gov/power_gov \
+		root@`get_vm_ip $1`:/
+}
+
+function rs_lr() {
+    rsync --exclude="*.swp" \
+            --exclude="cscope.out.in" \
+            --exclude="cscope.out" \
+            --exclude="cscope.files" \
+            --exclude="cscope.out.po" \
+            --exclude="tags" \
+            --exclude=".git" \
+            -avP ~/libos-runtime/ ~/rtos_osc_env/var/tmp/build-root/standard-x86_64/home/abuild/rpmbuild/BUILD/libos-runtime
+	chown -R 399:399 ~/rtos_osc_env/var/tmp/build-root/standard-x86_64/home/abuild/rpmbuild/BUILD
+}
+
+function rpm_unpack() {
+	_dir=${1%%.rpm}
+	rm -rf $_dir
+	mkdir $_dir
+	cd $_dir
+	rpm2cpio ../$1 |cpio -idmv
+	cd -
+}
+
+function goto() {
+sshpass -p huawei ssh root@`get_vm_ip $1`
+}
+
+function xxx() {
+	set -x
+	rm -rf ~/204/dpdk-16.11.2/x86_64-snb-linuxapp-gcc
+	cp -rf ~/rtos_osc_env/var/tmp/build-root/standard-x86_64/home/abuild/rpmbuild/BUILD/dpdk-16.11.2/x86_64-snb-linuxapp-gcc ~/204/dpdk-16.11.2/
+	cp -rf ~/rtos_osc_env/var/tmp/build-root/standard-x86_64/home/abuild/rpmbuild/BUILD/dpdk-16.11.2/l2fwd ~/204
+	cp -rf ~/rtos_osc_env/var/tmp/build-root/standard-x86_64/home/abuild/rpmbuild/BUILD/dpdk-16.11.2/helloworld ~/204
+	set +x
+}
+
+function yyy() {
+	set -x
+	rm -rf ~/204/dpdk-16.11.2.bak/x86_64-snb-linuxapp-gcc
+	cp -rf ~/rtos_osc_env/var/tmp/build-root/standard-x86_64/home/abuild/dpdk-16.11.2.bak/x86_64-snb-linuxapp-gcc ~/204/dpdk-16.11.2.bak/
+	cp -rf ~/rtos_osc_env/var/tmp/build-root/standard-x86_64/home/abuild/dpdk-16.11.2.bak/l2fwd ~/204/dpdk-16.11.2.bak/x86_64-snb-linuxapp-gcc
+	set +x
+}
+
+function rs_204() {
+    rsync --exclude="*.swp" \
+            --exclude="cscope.out.in" \
+            --exclude="cscope.out" \
+            --exclude="cscope.files" \
+            --exclude="cscope.out.po" \
+            --exclude="tags" \
+            -tavP ~/work/DPDK/ ~/204/rtos_sdk-x86_64_4.1.12/root/DPDK
+}
+
+function rs_kernel_r() {
+    rsync --exclude="*.swp" \
+            --exclude="cscope.out.in" \
+            --exclude="cscope.out" \
+            --exclude="cscope.files" \
+            --exclude="cscope.out.po" \
+            --exclude="tags" \
+            --exclude=".git" \
+            -avP ~/src/libos_lc/singleRAN/kernel-4.1/ ~/work/kernel-4.1
+}
+
+function rs_kernel() {
+	sshpass -p qweqwe rsync \
+            --exclude="*.swp" \
+            --exclude="cscope.out.in" \
+            --exclude="cscope.out" \
+            --exclude="cscope.files" \
+            --exclude="cscope.out.po" \
+            --exclude="ccglue.out" \
+            --exclude="ccglue.out.idx" \
+            --exclude="tags" \
+            --exclude=".git" \
+            -avP ~/work/kernel-4.1/ ~/src/kernel-4.1
+	#rsync -avP ~/work/kernel-4.1/.git/ ~/src/libos_lc/.mm/projects/singleRAN/kernel-4.1/RTOS/kernel-4.1.git
+}
+
+function sshfs_204() {
+	sudo sshfs -o allow_other root@10.67.188.204:/product ~/204
+}
+
+function sshfs_src() {
+	sudo sshfs -o allow_other oyxy@10.90.53.47:/home2/oyxy ~/src
+}
+
+function sshfs_osv() {
+	sudo sshfs -o allow_other lihua@10.67.188.184:/home/lihua/oyxy/osv ~/work/osv
+}
+
+
+function rs_lc() {
+	rsync --exclude="*.swp" \
+            --exclude="cscope.out.in" \
+            --exclude="cscope.out" \
+            --exclude="cscope.files" \
+            --exclude="cscope.out.po" \
+            --exclude="tags" \
+            --exclude=".git" \
+            -avP ~/src/libos_lc/singleRAN/self_src/rt-space/libos-core/ ~/rtos_osc_env_lc/var/tmp/build-root/standard-x86_64/home/abuild/rpmbuild/BUILD/libos-lc-1.0.0
+	chown -R 399:399 ~/rtos_osc_env_lc/var/tmp/build-root/standard-x86_64/home/abuild/rpmbuild/BUILD/libos-lc-1.0.0
+}
