@@ -9,7 +9,7 @@ ROOT=$DIR/../..
 
 trap fini EXIT INT TERM
 
-bash $ROOT/bash/setup.sh
+bash $ROOT/bash/setup.sh `echo ${DIR##*/4work/}`
 
 log "Setup tools..."
 rm -rf ~/tools
@@ -21,3 +21,6 @@ bash $DIR/vim/setup.sh
 bash $ROOT/git/setup.sh
 
 bash $DIR/tmux/setup.sh
+
+trap - EXIT
+log "All Done!"

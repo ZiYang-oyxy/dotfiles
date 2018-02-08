@@ -2,7 +2,7 @@
 	name = Ouyang Xiongyi
 	email = oywymail@163.com
 [color]
-	ui = always
+	ui = auto
 [diff]
 	tool = vimdiff
 [difftool]
@@ -10,9 +10,11 @@
 [alias]
 	s = status
 	d = diff
-	ss = show --pretty="" --name-only
+	ss = show --stat
+	ll = log --stat
 [core]
 	quotepath = off
+	excludesfile = ~/.gitignore_global
 [credential]
 	helper = cache --timeout=3600
 [push]

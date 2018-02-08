@@ -12,11 +12,17 @@ log "Setup bash..."
 rm -f ~/.bash_aliases
 rm -f ~/.bashrc
 rm -f ~/.profile
-ln -s $DIR/.bash_aliases ~/.bash_aliases
-ln -s $DIR/.bashrc ~/.bashrc
-ln -s $DIR/.profile ~/.profile
+rm -f ~/.inputrc
+ln -sf $DIR/.bash_aliases ~/.bash_aliases
+ln -sf $DIR/.bashrc ~/.bashrc
+ln -sf $DIR/.profile ~/.profile
+ln -sf $DIR/.inputrc ~/.inputrc
 if [[ ! -e ~/.bashrc_ignored ]]; then
 	cp -f $DIR/.bashrc_ignored ~/.bashrc_ignored
+fi
+
+if [[ -n $1 ]]; then
+    ln -sf $ROOT/4work/$1/bash/.bashrc_4work ~/.bashrc_4work
 fi
 
 log "Done!"

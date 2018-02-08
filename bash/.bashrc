@@ -111,19 +111,3 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-
-#export LANG=C
-#export LANGUAGE=
-#export LC_CTYPE=C
-#export LC_NUMERIC=C
-#export LC_TIME=C
-#export LC_COLLATE=C
-#export LC_MONETARY=C
-#export LC_MESSAGES=C
-#export LC_PAPER=C
-#export LC_NAME=C
-#export LC_ADDRESS=C
-#export LC_TELEPHONE=C
-#export LC_MEASUREMENT=C
-#export LC_IDENTIFICATION=C
-#export LC_ALL=

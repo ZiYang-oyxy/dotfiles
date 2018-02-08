@@ -38,8 +38,22 @@ alias la='ls -A'
 alias l='ls -CF'
 alias rr='xset r rate 250 50'
 
-[ -e ~/.bashrc_ignored ] && . ~/.bashrc_ignored
-[ -e ~/tools/common.sh ] && . ~/tools/common.sh
+function ssh() {
+	tmux setenv TMUX_SSHIP_$(tmux display -p "#D" | tr -d %) "$*"
+	/usr/bin/ssh $*
+	tmux setenv -u TMUX_SSHIP_$(tmux display -p "#D" | tr -d %)
+}
+
+function sshpass() {
+	tmux setenv TMUX_SSHIP_$(tmux display -p "#D" | tr -d %) "$*"
+	/usr/bin/sshpass $*
+	tmux setenv -u TMUX_SSHIP_$(tmux display -p "#D" | tr -d %)
+}
 
 [[ -s ~/.autojump/etc/profile.d/autojump.sh ]] && source ~/.autojump/etc/profile.d/autojump.sh
 alias s='j -s'
+
+[ -e ~/.bashrc_ignored ] && . ~/.bashrc_ignored
+[ -e ~/tools/common.sh ] && . ~/tools/common.sh
+[ -e ~/.bashrc_4work ] && . ~/.bashrc_4work
+

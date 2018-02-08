@@ -16,7 +16,8 @@ rm -rf ~/.tmux-pl-src
 
 ln -s $TMUXDIR/tmux.conf ~/.tmux.conf
 ln -s $TMUXDIR/tmux-powerlinerc ~/.tmux-powerlinerc
-# TODO install tmux-pl-src
-cp -r $TMUXDIR/custom/* ~/.tmux-pl-src/
+if git clone https://github.com/erikw/tmux-powerline ~/.tmux-pl-src; then
+	cp -r $TMUXDIR/custom/* ~/.tmux-pl-src/
+fi
 
 log "Done!"

@@ -5,6 +5,8 @@ set -e
 DIR=`readlink -f $(dirname $0)`
 ROOT=$DIR/../..
 
+source $ROOT/_common.sh
+
 log "Setup pandoc..."
 
 # install newest version of pandoc from https://github.com/jgm/pandoc/releases

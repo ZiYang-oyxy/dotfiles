@@ -7,7 +7,10 @@
 # Uses the following environment variables:
 # ARCH, SUBARCH, SRCARCH, srctree, src, obj
 
-KERNEL_BUILD=1
+#export KERNEL_BUILD=1
+#if [[ -z "$SRCARCH" ]]; then
+#	export SRCARCH=arm64
+#fi
 
 if [ "$KBUILD_VERBOSE" = "1" ]; then
 	set -x
@@ -116,6 +119,8 @@ all_sources()
 		done
 		find_other_sources '*.[chS]'
 	fi
+	find_all_sources '*.cc'
+	find_all_sources '*.hh'
 }
 
 all_compiled_sources()
