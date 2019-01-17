@@ -1,17 +1,13 @@
-#!/bin/bash
+#!/bin/bash -xve
 
-set -e
-
-DIR=`readlink -f $(dirname $0)`
-
-. "$DIR"/_common.sh
+source ~/dotfiles/_common.source
 
 trap fini EXIT INT TERM
 
 bash $DIR/bash/setup.sh
 
 log "Setup tools..."
-rm -rf ~/tools
+mv -f ~/tools ~/tools.bak
 ln -s $DIR/tools ~/tools
 log "Done!"
 
@@ -29,4 +25,4 @@ bash $DIR/tmux/setup.sh
 #xset r rate 220 160
 
 trap - EXIT
-log "All Done!"
+log "Done!"

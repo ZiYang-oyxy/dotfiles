@@ -6,5 +6,11 @@ cscope.files
 cscope.out
 cscope.out.in
 cscope.out.po
+ncscope.out
+.cscope.small
+.cscope.small.files
+cscope.out.files
 ccglue.out.idx
 ccglue.out
+.ignore
+.cscopedb.lock

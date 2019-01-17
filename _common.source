@@ -1,0 +1,33 @@
+#!/bin/bash
+
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+NC='\033[0m' # No Color
+
+fini(){
+    printf "${RED}Aborted!${NC}\n"
+    trap - EXIT
+    exit 1
+}
+
+
+log(){
+    printf "${GREEN}$@${NC}\n"
+}
+
+getdir(){
+    greadlink -f $(dirname $0)
+}
+
+_ln(){
+    if [[ -e "$2" ]]; then
+        mv -f $2 $2.bak
+    fi
+    ln -sf $1 $2
+}
+
+trap fini EXIT INT TERM
+
+DIR=`getdir`
+REPOS=~/dotfiles/.repos
+set -ex

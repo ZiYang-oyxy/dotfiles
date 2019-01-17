@@ -1,2 +1,5 @@
 vim/vim-base/undodir
-vim/vim-base/bundle
+vim/vim-base/plugged
+vim/vim-base/autoload/
+vim/vim-base/bundle/
+repos

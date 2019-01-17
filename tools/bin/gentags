@@ -7,10 +7,12 @@
 # Uses the following environment variables:
 # ARCH, SUBARCH, SRCARCH, srctree, src, obj
 
-#export KERNEL_BUILD=1
-#if [[ -z "$SRCARCH" ]]; then
-#	export SRCARCH=arm64
-#fi
+#export KERNEL_BUILD=a
+#unset KERNEL_BUILD
+if [[ -z "$SRCARCH" ]]; then
+	export SRCARCH=x86
+	export SUBARCH=x86_64
+fi
 
 if [ "$KBUILD_VERBOSE" = "1" ]; then
 	set -x
@@ -36,6 +38,13 @@ fi
 
 # ignore userspace tools
 ignore="$ignore ( -path ${tree}tools ) -prune -o"
+
+if [[ -f .ignore ]]; then
+    echo ".ignore exist"
+	while IFS='$\n' read -r line; do ignore="$ignore ( $line ) -prune -o"; done < .ignore
+fi
+
+echo $ignore
 
 # Find all available archs
 find_all_archs()
@@ -121,6 +130,7 @@ all_sources()
 	fi
 	find_all_sources '*.cc'
 	find_all_sources '*.hh'
+	find_all_sources '*.cpp'
 }
 
 all_compiled_sources()
@@ -168,8 +178,8 @@ all_defconfigs()
 
 docscope()
 {
-	(echo \-k; echo \-q; all_target_sources) > cscope.files
-	cscope -b -f cscope.out
+	(all_target_sources) > cscope.files
+	cscope -kqbR -U -i cscope.files -f cscope.out
 }
 
 dogtags()
@@ -248,7 +258,7 @@ exuberant()
 	--langdef=kconfig --language-force=kconfig              \
 	--regex-kconfig='/^[[:blank:]]*(menu|)config[[:blank:]]+([[:alnum:]_]+)/CONFIG_\2/'
 
-	all_defconfigs | xargs -r $1 -a                         \
+	all_defconfigs | xargs $1 -a                         \
 	--langdef=dotconfig --language-force=dotconfig          \
 	--regex-dotconfig='/^#?[[:blank:]]*(CONFIG_[[:alnum:]_]+)/\1/'
 }
@@ -354,12 +364,11 @@ case "$1" in
 		;;
 
 	"cl")
-		rm -f tags cscope.out.po cscope.out.in cscope.out cscope.files
+		rm -f tags cscope.out* cscope.files .cscope.small* ncscope.out* .cscopedb.lock
 		;;
 
 	*)
-		unset KERNEL_BUILD
-		rm -f tags cscope.out.po cscope.out.in cscope.out cscope.files
+		rm -f tags cscope.out* cscope.files .cscope.small* ncscope.out* .cscopedb.lock
 		docscope
 		xtags ctags
 		remove_structs=y

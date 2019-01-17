@@ -55,5 +55,3 @@ alias s='j -s'
 
 [ -e ~/.bashrc_ignored ] && . ~/.bashrc_ignored
 [ -e ~/tools/common.sh ] && . ~/tools/common.sh
-[ -e ~/.bashrc_4work ] && . ~/.bashrc_4work
-

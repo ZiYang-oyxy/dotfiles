@@ -1,6 +1,0 @@
-#!/bin/bash
-
-sudo killall fcitx
-sudo killall sogou-qimpanel
-fcitx 2>&1 > /dev/null
-sogou-qimpanel 2>&1 > /dev/null

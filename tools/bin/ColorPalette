@@ -40,3 +40,11 @@ for FGs in '    m' '   1m' '  30m' '1;30m' '  31m' '1;31m' '  32m' '1;32m' '  33
     echo;
 done
 echo
+
+echo -e ":\033[0mNormal"
+echo -e ":\033[1mBold\033[21m"
+echo -e ":\033[2mDim\033[22m"
+echo -e ":\033[4mUnderlined\033[24m"
+echo -e ":\033[5mBlink\033[25m"
+echo -e ":\033[7minverted\033[27m"
+echo -e ":\033[8mHidden\033[28m"

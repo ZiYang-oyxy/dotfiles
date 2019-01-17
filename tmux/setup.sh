@@ -1,22 +1,16 @@
 #!/bin/bash
 
-set -e
+source ~/dotfiles/_common.source
 
-DIR=`readlink -f $(dirname $0)`
-ROOT=$DIR/..
+log "Setup $DIR..."
 
-. $ROOT/_common.sh
+_ln $DIR/tmux.conf ~/.tmux.conf
+_ln $DIR/tmux-powerlinerc ~/.tmux-powerlinerc
 
-log "Setup tmux..."
-
-rm -f ~/.tmux.conf
-rm -f ~/.tmux-powerlinerc
-
-ln -s $DIR/tmux.conf ~/.tmux.conf
-ln -s $DIR/tmux-powerlinerc ~/.tmux-powerlinerc
 [[ -d ~/.tmux-pl-src ]] || {
 git clone https://github.com/erikw/tmux-powerline ~/.tmux-pl-src
 }
-cp -r $DIR/custom/* ~/.tmux-pl-src/
+_ln $DIR/custom/themes/mytheme.sh ~/.tmux-pl-src/themes/mytheme.sh
 
-log "Done!"
+trap - EXIT
+log "$DIR Done!"

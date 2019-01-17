@@ -12,12 +12,16 @@
 	d = diff
 	ss = show --stat
 	ll = log --stat
+	br = branch
 [core]
 	quotepath = off
 	excludesfile = ~/.gitignore_global
 [credential]
 	helper = cache --timeout=3600
 [push]
-	default = matching
+	default = simple
 [include]
 	    path = ~/.gitconfig_ignored
+[mergetool "gitblade"]
+	cmd = \"/Applications/GitBlade.app/Contents/MacOS/GitBlade\" -c \"\"
+	trustExitCode = true
