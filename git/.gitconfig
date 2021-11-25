@@ -1,6 +1,6 @@
 [user]
-	name = Ouyang Xiongyi
-	email = oywymail@163.com
+	name = ouyangxiongyi
+	email = ouyangxiongyi@baidu.com
 [color]
 	ui = auto
 [diff]
@@ -25,3 +25,7 @@
 [mergetool "gitblade"]
 	cmd = \"/Applications/GitBlade.app/Contents/MacOS/GitBlade\" -c \"\"
 	trustExitCode = true
+[https]
+	proxy = https://127.0.0.1:1087
+[http]
+	proxy = http://127.0.0.1:1087

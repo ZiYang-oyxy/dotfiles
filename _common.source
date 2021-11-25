@@ -10,7 +10,6 @@ fini(){
     exit 1
 }
 
-
 log(){
     printf "${GREEN}$@${NC}\n"
 }
@@ -21,13 +20,13 @@ getdir(){
 
 _ln(){
     if [[ -e "$2" ]]; then
+        rm -rf $2.bak
         mv -f $2 $2.bak
     fi
     ln -sf $1 $2
 }
 
-trap fini EXIT INT TERM
+#trap fini EXIT INT TERM
 
 DIR=`getdir`
-REPOS=~/dotfiles/.repos
 set -ex

@@ -1,8 +1,17 @@
 #!/bin/bash
 
+# for mbp m1
+eval "$(/opt/homebrew/bin/brew shellenv)"
+export BASH_SILENCE_DEPRECATION_WARNING=1
+
 export VISUAL=vim
 export EDITOR="$VISUAL"
-export PATH=/sbin:~/bin:~/tools:~/work/arcanist/bin:$PATH:~/work/libphutil/scripts/utils
+export PATH=/sbin:~/bin:~/tools:$PATH
+export PATH=$(brew --prefix)/opt/coreutils/libexec/gnubin:$PATH
+export PATH=$(brew --prefix)/opt/binutils/bin:$PATH
+export PATH=$(brew --prefix)/opt/findutils/libexec/gnubin:$PATH
+export PATH=$(brew --prefix)/opt/grep/libexec/gnubin/:$PATH
+export PATH=$(brew --prefix)/opt/ctags/bin:$PATH
 
 TERM=xterm
 
@@ -165,7 +174,7 @@ fi
 #
 #    MANPATH="/usr/local/opt/make/libexec/gnuman:$MANPATH"
 
-#curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash && echo "source ~/.git-completion.bash" >> ~/.bash_profile && source ~/.bash_profile
+#curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
 source ~/.git-completion.bash
 
 alias vi="vim"
@@ -179,7 +188,7 @@ alias l='gls --color=auto -CF'
 alias rr='xset r rate 250 50'
 alias rm='grm'
 alias cp='gcp'
-alias rsync='rsync --filter=":- /Users/ziyang163514/.gitignore_global"'
+alias rsync='rsync --filter=":- ~/.gitignore_global"'
 
 #function ssh() {
 #	tmux setenv TMUX_SSHIP_$(tmux display -p "#D" | tr -d %) "$*"
@@ -206,3 +215,13 @@ bind '"\e[1;5D": backward-word'
 [ -e ~/.bashrc_ignored ] && . ~/.bashrc_ignored
 [ -e ~/tools/common.sh ] && . ~/tools/common.sh
 [ -e ~/.bashrc_4work ] && . ~/.bashrc_4work
+
+_vps=tjy@149.129.69.46
+
+g()
+{
+    target="_$1"
+    ssh ${!target}
+}
+
+source ~/tools/xfinder.source

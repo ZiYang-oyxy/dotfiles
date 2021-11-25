@@ -179,7 +179,7 @@ all_defconfigs()
 docscope()
 {
 	(all_target_sources) > cscope.files
-	cscope -kqbR -U -i cscope.files -f cscope.out
+	cscope -kbR -i cscope.files -f cscope.out
 }
 
 dogtags()

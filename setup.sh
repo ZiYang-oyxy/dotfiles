@@ -2,20 +2,25 @@
 
 source ~/dotfiles/_common.source
 
-trap fini EXIT INT TERM
-
 bash $DIR/bash/setup.sh
 
+mkdir -p $DIR/.repo
+
 log "Setup tools..."
-mv -f ~/tools ~/tools.bak
+if [[ -d ~/tools ]]; then
+    rm -rf ~/tools.bak
+    mv ~/tools ~/tools.bak
+fi
 ln -s $DIR/tools ~/tools
-log "Done!"
+bash $DIR/tools/setup.sh
 
 bash $DIR/vim/setup.sh
 
 bash $DIR/git/setup.sh
 
 bash $DIR/tmux/setup.sh
+
+bash $DIR/autojump/setup.sh
 
 #bash $DIR/fonts/setup.sh
 

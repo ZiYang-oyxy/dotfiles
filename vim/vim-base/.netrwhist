@@ -1,3 +1,12 @@
 let g:netrw_dirhistmax  =10
 let g:netrw_dirhistcnt =1
-let g:netrw_dirhist_1='/Users/ziyang163514/.airdrop'
+let g:netrw_dirhist_1='/Volumes/Work/bvs/dpdk/drivers'
+let g:netrw_dirhist_0='/Volumes/Work/bvs/dpdk'
+let g:netrw_dirhist_9='/Volumes/Work/PMD-NET-DPDK'
+let g:netrw_dirhist_8='/Volumes/Work/bvs/dpdk'
+let g:netrw_dirhist_7='/Volumes/Work/bvs/dpdk/examples/baidu_smartnic_fpga_net_dma_simulator'
+let g:netrw_dirhist_6='/Volumes/Work/bvs/datapath'
+let g:netrw_dirhist_5='/Users/ouyangxiongyi/dotfiles/vim/vim-base/.vim'
+let g:netrw_dirhist_4='/Users/ouyangxiongyi/dotfiles/Users/ouyangxiongyi/dotfiles/.repos/autojump'
+let g:netrw_dirhist_3='/Users/ouyangxiongyi/dotfiles/Users/ouyangxiongyi/dotfiles/.repos'
+let g:netrw_dirhist_2='/Users/ouyangxiongyi/dotfiles/autojump'

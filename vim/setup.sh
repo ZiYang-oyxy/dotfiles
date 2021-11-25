@@ -12,16 +12,15 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.c
 # for persistant undo
 mkdir -p ~/.vim/undodir
 
-[ -d ~/.vim/bundle/vundle ] || {
-git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-}
+#if ! type ctags >/dev/null 2>&1; then
+#    sudo apt-get install exuberant-ctags
+#fi
 
-if ! type ctags >/dev/null 2>&1; then
-    sudo apt-get install exuberant-ctags
-fi
+#if ! type cscope >/dev/null 2>&1; then
+#    sudo apt-get install cscope
+#fi
 
-if ! type cscope >/dev/null 2>&1; then
-    sudo apt-get install cscope
-fi
+# needed by vim ale
+#brew install cppcheck shellcheck
 
 log "$DIR Done!"

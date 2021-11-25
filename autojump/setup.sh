@@ -4,9 +4,9 @@ source ~/dotfiles/_common.source
 
 log "Setup $DIR..."
 
-git clone --depth 1 https://github.com/wting/autojump.git ~/dotfiles/$REPOS/autojump
+git clone --depth 1 https://github.com/wting/autojump.git $DIR/.repo/autojump
 (
-cd $REPOS/autojump
+cd $DIR/.repo/autojump
 ./install.py
 )
 

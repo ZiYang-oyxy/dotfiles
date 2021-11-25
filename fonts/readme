@@ -1,0 +1,4 @@
+# for mac osx, refer to https://gist.github.com/DukeNgn/9312a65e1535b3b1bffd9fed2c892079#configure-fonts
+git clone https://github.com/powerline/fonts.git
+cd fonts
+./install.sh

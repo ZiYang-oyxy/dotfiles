@@ -212,6 +212,12 @@ Plug 'tomtom/tlib_vim'
 Plug 'garbas/vim-snipmate'
 Plug 'honza/vim-snippets'
 let g:snips_author = 'Ouyang Xiongyi'
+let g:snipMate = { 'snippet_version' : 0 }
+"Plug 'SirVer/ultisnips'
+"let g:UltiSnipsExpandTrigger="<tab>"
+"let g:UltiSnipsJumpForwardTrigger="<c-b>"
+"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+"let g:UltiSnipsEditSplit="vertical"
 
 " Git
 Plug 'tpope/vim-fugitive'

@@ -16,7 +16,7 @@ function _xfindi()
 }
 
 find_ed() {
-	gawk --re-interval -v cmd="$*" -v me="~/.airdrop/config/xfinder.source" '
+	gawk --re-interval -v cmd="$*" -v me="~/tools/xfinder.source" '
 	BEGIN {
 		system("clear")
 		cmd2 = sprintf("bash -c \"source %s; %s\"", me, cmd)
@@ -55,7 +55,7 @@ alias xfindi="find_ed _xfindi"
 FIND='find . -regextype posix-egrep'
 SHELL_FILE_PAT_REV="(.*/(Makefile|makefile)|.*\.(c|h|cpp|S|java|xml|mk|lua|go))"
 C_FILE_PAT=".*\.(c|cc|cpp|h)"
-MAKE_FILE_PAT="(.*/(Makefile|makefile|CMakeLists\.txt)|.*\.(mk))"
+MAKE_FILE_PAT="(.*/(Makefile|meson\.build|makefile|CMakeLists\.txt)|.*\.(mk))"
 GO_FILE_PAT=".*\.(go)"
 
 grep_ed() {
@@ -67,7 +67,7 @@ grep_ed() {
 
 	CMD=$CMD" \\\\\"$*\\\\\""
 
-	gawk --re-interval -v cmd="$CMD" -v me="~/.airdrop/config/xfinder.source" '
+	gawk --re-interval -v cmd="$CMD" -v me="~/tools/xfinder.source" '
 	BEGIN {
 		system("clear")
 		cmd2 = sprintf("bash -c \"source %s; %s\"", me, cmd)

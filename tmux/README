@@ -6,3 +6,7 @@ REQUIREMENT:
 2. Some problem in compiling:
 
     sudo apt-get install automake libevent-dev libncurses5-dev
+
+3. tmux on macos copy large buffer failed
+
+    brew install reattach-to-user-namespace
